@@ -1,0 +1,25 @@
+{
+  "name": "serverless-example",
+  "version": "1.0.0",
+  "description": "Serverless Example",
+  "main": "index.js",
+  "directories": {
+    "test": "npm run lint && mocha --recursive",
+    "coverage": "./node_modules/.bin/nyc --reporter=lcov --reporter=text npm test",
+    "lint": "eslint ."
+  },
+  "keywords": [
+    "serverless",
+    "http",
+    "methods",
+    "json-api",
+    "json"
+  ],
+  "author": "Ashish Tilara <ashish@itcutives.com>",
+  "license": "MIT",
+  "dependencies": {
+    "@itcutives/adapter-mysql": "git+https://github.com/ITcutives/adapter-mysql.git",
+    "@itcutives/serverless-helpers": "git+https://github.com/ITcutives/serverless-helpers.git#1.0.0",
+    "jsonwebtoken": "^8.2.1"
+  }
+}

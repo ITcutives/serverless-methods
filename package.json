@@ -1,0 +1,38 @@
+{
+  "name": "@itcutives/serverless-methods",
+  "version": "1.0.0",
+  "description": "Serverless HTTP Method handlers",
+  "main": "index.js",
+  "directories": {
+    "test": "npm run lint && mocha --recursive",
+    "coverage": "./node_modules/.bin/nyc --reporter=lcov --reporter=text npm test",
+    "lint": "eslint ."
+  },
+  "scripts": {
+    "test": ".travis.yml"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ITcutives/serverless-methods.git"
+  },
+  "keywords": [
+    "serverless",
+    "http",
+    "methods",
+    "json-api",
+    "json"
+  ],
+  "author": "Ashish Tilara <ashish@itcutives.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ITcutives/serverless-methods/issues"
+  },
+  "homepage": "https://github.com/ITcutives/serverless-methods#readme",
+  "devDependencies": {
+    "mocha": "^5.2.0",
+    "nyc": "^11.8.0"
+  },
+  "dependencies": {
+    "jsonwebtoken": "^8.2.1"
+  }
+}
