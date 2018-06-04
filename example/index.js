@@ -3,7 +3,7 @@
  */
 const REQ = require("@itcutives/serverless-helpers/src/request");
 const RES = require("@itcutives/serverless-helpers/src/response");
-const {finish, errorHandler} = require("@itcutives/serverless-helpers/lambdaResponseHandler");
+const {finish, errorHandler} = require("@itcutives/serverless-helpers/src/lambdaCallbackHandler");
 
 const Token = require("../src/helpers/token");
 

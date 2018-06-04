@@ -1,0 +1,19 @@
+
+service: serverless-example
+
+provider:
+  name: aws
+  runtime: nodejs8.10
+  stage: dev
+  region: ap-southeast-2
+
+plugins:
+  - serverless-offline
+
+functions:
+  index:
+    handler: example/index.handler
+    events:
+      - http:
+          path: users
+          method: get

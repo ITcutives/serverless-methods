@@ -6,12 +6,8 @@ const ErrorCodes = require('./helpers/error-codes.json');
 const Abstract = require('./abstract');
 
 class Delete extends Abstract {
-  validate() {
-
-  }
-
   async handle() {
-    let Cls, o, parent, id;
+    let Cls, classInstance, parent, id;
 
     parent = this.request.url.params.parent;
     id = this.request.url.params.id;
@@ -27,17 +23,15 @@ class Delete extends Abstract {
     }
 
     Cls = require(this.token.rootDir + '/models/' + parent);
-    o = new Cls();
-    return o.SELECT({'id': id})
-      .then(records => {
-        if (records.length === 0) {
-          throw Boom.notFound(ErrorCodes.RECORD_NOT_FOUND_DELETE);
-        }
-        return records[0];
-      })
-      .then(record => this.token.isAllowed(Cls.PLURAL, 'delete', record))
-      .then(o => o.DELETE())
-      .then(() => this.response.respond(204, undefined));
+    classInstance = new Cls();
+    let records = await classInstance.SELECT({'id': id});
+    if (records.length === 0) {
+      throw Boom.notFound(ErrorCodes.RECORD_NOT_FOUND_DELETE);
+    }
+    let record = records[0];
+    record = await this.token.isAllowed(Cls.PLURAL, 'delete', record);
+    record.DELETE();
+    return this.response.respond(204, undefined);
   }
 }
 

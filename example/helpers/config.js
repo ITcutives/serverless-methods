@@ -8,5 +8,5 @@ module.exports = {
     'database': 'serverless',
     'connectionLimit': 2
   },
-  'AUTH0': ''
+  'AUTH0': 'abcd'
 };

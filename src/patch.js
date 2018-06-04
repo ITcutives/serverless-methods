@@ -9,7 +9,7 @@ class Patch extends Abstract {
   }
 
   async handle() {
-    return Promise.resolve(this.response.respond(200, this.request));
+    return this.response.respond(200, this.request);
   }
 }
 

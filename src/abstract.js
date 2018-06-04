@@ -7,11 +7,10 @@ class Abstract {
     this.response = response;
     this.env = env;
     this.token = token;
-    this.parentPath = token.rootDir;
   }
 
   async handle() {
-    return Promise.resolve(this.response.respond(200, this.request));
+    return this.response.respond(200, this.request);
   }
 }
 
