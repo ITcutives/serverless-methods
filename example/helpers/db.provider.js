@@ -3,6 +3,7 @@
  */
 const Adapter = require('@itcutives/adapter-mysql/src/adapter');
 const Connect = require('@itcutives/adapter-mysql/src/connection');
+
 class MySQL extends Adapter {
   static CONNECT(config) {
     if (!MySQL.CONN) {
@@ -11,6 +12,7 @@ class MySQL extends Adapter {
     return Promise.resolve(MySQL.CONN);
   }
 
+  // eslint-disable-next-line no-unused-vars
   static getCondition(token) {
     return [];
   }

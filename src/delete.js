@@ -7,10 +7,7 @@ const Abstract = require('./abstract');
 
 class Delete extends Abstract {
   async handle() {
-    let Cls, classInstance, parent, id;
-
-    parent = this.request.url.params.parent;
-    id = this.request.url.params.id;
+    const { parent, id } = this.request.url.params;
 
     // check entity
     if (this.env.CLASSES.indexOf(parent) === -1) {
@@ -22,9 +19,9 @@ class Delete extends Abstract {
       throw Boom.badRequest(ErrorCodes.ID_REQUIRED_FOR_DELETE);
     }
 
-    Cls = require(this.token.rootDir + '/models/' + parent);
-    classInstance = new Cls();
-    let records = await classInstance.SELECT({'id': id});
+    const Cls = require(`${this.token.rootDir}/models/${parent}`);
+    const classInstance = new Cls();
+    const records = await classInstance.SELECT({ id });
     if (records.length === 0) {
       throw Boom.notFound(ErrorCodes.RECORD_NOT_FOUND_DELETE);
     }

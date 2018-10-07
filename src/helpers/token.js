@@ -8,7 +8,6 @@ class Token {
     this.authorisation = Token.UNAUTHORISED;
     this.isSuper = false;
     this.decoded = undefined;
-    this.user = {};
   }
 
   static get UNAUTHORISED() {
@@ -42,14 +41,16 @@ class Token {
    * @constructor
    */
   static Handler(authorization, auth0) {
-    let headerPart,
-      t;
+    let headerPart;
+
+
+    let t;
 
     authorization = authorization || '';
     headerPart = authorization.split(' ');
 
     t = new Token();
-    //in case if we need the raw jwt in future
+    // in case if we need the raw jwt in future
     t.jwt = headerPart[1];
     switch (headerPart[0]) {
       case 'Bearer':
@@ -84,19 +85,18 @@ class Token {
   }
 
   isAllowed(plural, action, object) {
-    let Cls = require(this.rootDir + '/security/' + plural);
-    let obj = new Cls(this, action, object);
+    const Cls = require(`${this.rootDir}/security/${plural}`);
+    const obj = new Cls(this, action, object);
     return obj.isAllowed();
   }
 
   getPermission() {
     if (this.authorisation === Token.UNAUTHORISED) {
       return 'UNAUTHORISED';
-    } else if (this.isSuper === true) {
+    } if (this.isSuper === true) {
       return 'SUPER';
-    } else {
-      return 'ADMIN';
     }
+    return 'ADMIN';
   }
 }
 

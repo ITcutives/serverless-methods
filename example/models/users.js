@@ -1,10 +1,6 @@
 const Abstract = require('../helpers/db.provider');
 
 class User extends Abstract {
-  constructor (entity) {
-    super(entity);
-  }
-
   /**
    * @returns {string}
    */
@@ -17,7 +13,7 @@ class User extends Abstract {
    */
   static get TABLE() {
     return 'user';
-  };
+  }
 
   static get USER() {
     return 'USER';
@@ -27,3 +23,5 @@ class User extends Abstract {
     return 'SUPER';
   }
 }
+
+module.exports = User;

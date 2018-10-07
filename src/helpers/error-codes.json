@@ -1,5 +1,9 @@
 {
-  "BAD_ENTITY_NAME": "E0001",
-  "RECORD_NOT_FOUND_DELETE": "E0002",
-  "ID_REQUIRED_FOR_DELETE": "E0003"
+  "BAD_ENTITY_NAME": "E0001:Bad Entity Name",
+  "RECORD_NOT_FOUND_DELETE": "E0002:Record Not Found",
+  "ID_REQUIRED_FOR_DELETE": "E0003:Missing Parameter ID",
+  "ID_MISMATCH_WITH_OBJECT_ID": "E0004:list of ids mismatch with object ids",
+  "URL_ID_MISMATCH_WITH_OBJECT_ID": "E0005:ids in URL mismatch with object ids",
+  "NO_ID_IN_URL": "E0006:url does not mention any ids",
+  "INVALID_IDS": "E0007:not all ids exist in database"
 }

@@ -6,7 +6,8 @@
   "directories": {
     "test": "npm run lint && mocha --recursive",
     "coverage": "./node_modules/.bin/nyc --reporter=lcov --reporter=text npm test",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "run:local": "sls offline start"
   },
   "keywords": [
     "serverless",
@@ -19,7 +20,10 @@
   "license": "MIT",
   "dependencies": {
     "@itcutives/adapter-mysql": "git+https://github.com/ITcutives/adapter-mysql.git",
-    "@itcutives/serverless-helpers": "git+https://github.com/ITcutives/serverless-helpers.git#1.0.0",
+    "@itcutives/serverless-helpers": "^1.0.1",
     "jsonwebtoken": "^8.2.1"
+  },
+  "devDependencies": {
+    "serverless-offline": "^3.24.5"
   }
 }
