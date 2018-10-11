@@ -1,9 +1,12 @@
 {
-  "BAD_ENTITY_NAME": "E0001:Bad Entity Name",
-  "RECORD_NOT_FOUND_DELETE": "E0002:Record Not Found",
-  "ID_REQUIRED_FOR_DELETE": "E0003:Missing Parameter ID",
-  "ID_MISMATCH_WITH_OBJECT_ID": "E0004:list of ids mismatch with object ids",
-  "URL_ID_MISMATCH_WITH_OBJECT_ID": "E0005:ids in URL mismatch with object ids",
-  "NO_ID_IN_URL": "E0006:url does not mention any ids",
-  "INVALID_IDS": "E0007:not all ids exist in database"
+  "E0001_BAD_ENTITY_NAME": "E0001:Bad Entity Name",
+  "E0002_RECORD_NOT_FOUND_DELETE": "E0002:Record Not Found",
+  "E0003_ID_REQUIRED_FOR_DELETE": "E0003:Missing Parameter ID",
+  "E0004_ID_MISMATCH_WITH_OBJECT_ID": "E0004:list of ids mismatch with object ids",
+  "E0005_URL_ID_MISMATCH_WITH_OBJECT_ID": "E0005:ids in URL mismatch with object ids",
+  "E0006_NO_ID_IN_URL": "E0006:url does not mention any ids",
+  "E0007_INVALID_IDS": "E0007:not all ids exist in database",
+  "E0008_BAD_REQUEST_BODY": "E0008:invalid request body",
+  "E0009_PERMISSION_UPDATE": "E0009:you are not allowed to modify one or more objects",
+  "E0010_PERMISSION_INSERT": "E0010:you are not allowed to insert one or more objects"
 }

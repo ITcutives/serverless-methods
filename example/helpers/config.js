@@ -1,3 +1,4 @@
+// process.env.debug = 'true';
 module.exports = {
   DATABASE: {
     type: 'mysql',
@@ -8,5 +9,9 @@ module.exports = {
     database: 'serverless',
     connectionLimit: 2,
   },
-  AUTH0: 'abcd',
+  AUTH0: 'YWJjZA==',
+  CLASSES: [
+    'users',
+    'articles',
+  ],
 };

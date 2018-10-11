@@ -14,6 +14,11 @@ functions:
   index:
     handler: example/index.handler
     events:
-      - http:
-          path: users
-          method: get
+    - http:
+        path: v1/{parent}/{id}
+        method: put
+        cors: true
+    - http:
+        path: v1/{parent}
+        method: put
+        cors: true

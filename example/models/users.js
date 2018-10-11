@@ -22,6 +22,29 @@ class User extends Abstract {
   static get SUPER() {
     return 'SUPER';
   }
+
+  /**
+   * @returns {Array}
+   */
+  static get FIELDS() {
+    return ['id', 'type', 'attributes'];
+  }
+
+  /**
+   * @returns {Array}
+   */
+  static get LINKS() {
+    return [];
+  }
+
+  /**
+   * @returns {{}}
+   */
+  static get SERIALIZED() {
+    return {
+      attributes: 'json',
+    };
+  }
 }
 
 module.exports = User;

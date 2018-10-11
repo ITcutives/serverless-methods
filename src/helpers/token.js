@@ -40,32 +40,24 @@ class Token {
    * @returns {*}
    * @constructor
    */
-  static Handler(authorization, auth0) {
-    let headerPart;
+  static async Handler(authorization = '', auth0) {
+    const headerPart = authorization.split(' ');
 
-
-    let t;
-
-    authorization = authorization || '';
-    headerPart = authorization.split(' ');
-
-    t = new Token();
-    // in case if we need the raw jwt in future
-    t.jwt = headerPart[1];
-    switch (headerPart[0]) {
-      case 'Bearer':
-        t.authorisationType = Token.AUTH0;
-        return t.verifyJwt(headerPart[1], auth0, 'base64');
-      case 'Token':
-        t.authorisationType = Token.KEY;
-        return t.decodeJwt(headerPart[1]);
+    const t = new Token();
+    if (headerPart[0] === 'Bearer') {
+      t.authorisationType = Token.AUTH0;
+      await t.verifyJwt(headerPart[1], auth0, 'base64');
+    } else if (headerPart[0] === 'Token') {
+      t.authorisationType = Token.KEY;
+      await t.decodeJwt(headerPart[1]);
+    } else {
+      t.authorisationType = Token.UNAUTHORISED;
     }
     return Promise.resolve(t);
   }
 
   verifyJwt(jwt, auth0, encoding) {
-    let secret;
-    secret = new Buffer(auth0, encoding);
+    const secret = Buffer.from(auth0, encoding);
     this.decoded = JWT.verify(jwt, secret);
     return Promise.resolve(this);
   }

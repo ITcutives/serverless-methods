@@ -1,41 +1,12 @@
-class User {
-  /**
-   * @returns {{}}
-   */
-  static get SERIALIZED() {
-    return {};
-  }
+const Boom = require('boom');
+const Security = require('../../src/helpers/Security');
 
-  /**
-   * @returns {string}
-   */
-  static get PLURAL() {
-    return 'users';
-  }
-
-  /**
-   * @returns {string}
-   */
-  static get TABLE() {
-    return 'user';
-  }
-
-  /**
-   * @returns {Array}
-   */
-  static get FIELDS() {
-    return ['id', 'name', 'type'];
-  }
-
-  /**
-   * @returns {Array}
-   */
-  static get LINKS() {
-    return [];
-  }
-
-  static validate() {
-
+class User extends Security {
+  async ADMIN() {
+    if (this.token.decoded.iss === this.object.get('id')) {
+      return this.object;
+    }
+    throw Boom.forbidden('invalid name');
   }
 }
 

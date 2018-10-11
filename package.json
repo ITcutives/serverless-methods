@@ -29,15 +29,16 @@
   },
   "homepage": "https://github.com/ITcutives/serverless-methods#readme",
   "devDependencies": {
-    "mocha": "^5.2.0",
-    "nyc": "^11.8.0",
-    "serverless-offline": "^3.24.5",
     "eslint": "^5.6.1",
     "eslint-config-airbnb-base": "^13.1.0",
-    "eslint-plugin-import": "^2.14.0"
+    "eslint-plugin-import": "^2.14.0",
+    "mocha": "^5.2.0",
+    "nyc": "^11.9.0",
+    "serverless-offline": "^3.27.0"
   },
   "dependencies": {
     "boom": "^7.2.0",
-    "jsonwebtoken": "^8.2.1"
+    "jsonwebtoken": "^8.3.0",
+    "lodash": "^4.17.11"
   }
 }

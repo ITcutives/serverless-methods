@@ -9,6 +9,10 @@ class Abstract {
     this.token = token;
   }
 
+  getClassConstructor(name) {
+    return require(`${this.token.rootDir}/models/${name}`);
+  }
+
   async handle() {
     return this.response.respond(200, this.request);
   }

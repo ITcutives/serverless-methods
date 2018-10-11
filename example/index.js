@@ -15,7 +15,7 @@ const DB = require('./helpers/db.provider');
  * @param context
  * @param cb
  */
-module.exports.handler = function (event, context, cb) {
+module.exports.handler = (event, context, cb) => {
   const request = REQ.normaliseLambdaRequest(event);
   const response = new RES();
   let handler;
@@ -28,13 +28,14 @@ module.exports.handler = function (event, context, cb) {
         return finish(cb, response.statusCode, response.body, response.headers);
       }
 
+      // eslint-disable-next-line no-param-reassign
       token.rootDir = __dirname;
       request.setToken(token);
 
-      const Get = require('../src/get');
+      const Get = require('../src/put');
       handler = new Get(request, response, Config, token);
       return handler.handle();
     })
-    .then(response => finish(cb, response.statusCode, response.body, response.headers))
+    .then(resp => finish(cb, resp.statusCode, resp.body, resp.headers))
     .catch(error => errorHandler(cb, error));
 };
