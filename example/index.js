@@ -8,7 +8,7 @@ const { finish, errorHandler } = require('@itcutives/serverless-helpers/src/lamb
 const Token = require('../src/helpers/token');
 
 const Config = require('./helpers/config');
-const DB = require('./helpers/db.provider');
+const DB = require('./helpers/db.provider').Mongo;
 
 /**
  * @param event
@@ -21,7 +21,7 @@ module.exports.handler = (event, context, cb) => {
   let handler;
 
   Token.Handler(request.headers.authorization, Config.AUTH0)
-    .then(token => DB.CONNECT(Config.DATABASE).then(() => token.prepare()))
+    .then(token => DB.CONNECT(Config.MONGO).then(() => token.prepare()))
     .then((token) => {
       if (!token) {
         response.respond(403, { error: 'permission denied' });
@@ -32,7 +32,7 @@ module.exports.handler = (event, context, cb) => {
       token.rootDir = __dirname;
       request.setToken(token);
 
-      const Get = require('../src/put');
+      const Get = require(`../src/${request.method}`);
       handler = new Get(request, response, Config, token);
       return handler.handle();
     })

@@ -1,4 +1,4 @@
-const Abstract = require('../helpers/db.provider');
+const Abstract = require('../helpers/db.provider').Mongo;
 
 class User extends Abstract {
   /**
@@ -34,7 +34,11 @@ class User extends Abstract {
    * @returns {Array}
    */
   static get LINKS() {
-    return [];
+    return [
+      {
+        PLURAL: 'articles', LINK: 'user_id', TYPE: '1TOM', CANMODIFY: false,
+      },
+    ];
   }
 
   /**

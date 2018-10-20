@@ -9,7 +9,8 @@
   "scripts": {
     "test": ".travis.yml",
     "coverage": "./node_modules/.bin/nyc --reporter=lcov --reporter=text npm test",
-    "lint": "npx eslint ."
+    "lint": "npx eslint .",
+    "start": "npx sls offline start"
   },
   "repository": {
     "type": "git",

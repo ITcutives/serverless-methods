@@ -1,4 +1,3 @@
-
 service: serverless-example
 
 provider:
@@ -8,7 +7,7 @@ provider:
   region: ap-southeast-2
 
 plugins:
-  - serverless-offline
+- serverless-offline
 
 functions:
   index:
@@ -21,4 +20,22 @@ functions:
     - http:
         path: v1/{parent}
         method: put
+        cors: true
+    #---------------------------------------
+    - http:
+        path: v1/{parent}/{id}/{association}
+        method: get
+        cors: true
+    - http:
+        path: v1/{parent}/{id}
+        method: get
+        cors: true
+    - http:
+        path: v1/{parent}
+        method: get
+        cors: true
+    #---------------------------------------
+    - http:
+        path: v1/{parent}/{id}
+        method: delete
         cors: true

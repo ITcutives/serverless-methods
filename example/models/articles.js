@@ -1,5 +1,5 @@
 const Boom = require('boom');
-const Abstract = require('../helpers/db.provider');
+const Abstract = require('../helpers/db.provider').Mongo;
 
 class Article extends Abstract {
   /**

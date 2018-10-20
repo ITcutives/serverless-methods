@@ -11,7 +11,6 @@ class Security {
     let permission;
     return Promise.resolve().then(() => {
       permission = this.token.getPermission();
-      console.log(permission);
       return this[permission]();
     });
   }

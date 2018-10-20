@@ -3,10 +3,13 @@ const Security = require('../../src/helpers/Security');
 
 class User extends Security {
   async ADMIN() {
-    if (this.token.decoded.iss === this.object.get('id')) {
-      return this.object;
+    if (['create', 'update'].includes(this.action)) {
+      if (this.token.decoded.iss === this.object.get('id')) {
+        return this.object;
+      }
+      throw Boom.forbidden('invalid name');
     }
-    throw Boom.forbidden('invalid name');
+    return this.object;
   }
 }
 
