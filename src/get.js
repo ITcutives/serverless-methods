@@ -5,23 +5,23 @@ const Boom = require('boom');
 const loIsEmpty = require('lodash/isEmpty');
 const ErrorCodes = require('./helpers/error-codes.json');
 const { mapReflect } = require('./helpers/common');
-const queryStringParser = require('./helpers/queryStringParser');
+const { conditionBuilder, qsPrep } = require('./helpers/queryStringParser');
 const Abstract = require('./abstract');
 
 class Get extends Abstract {
   async handle() {
     const { token } = this;
 
-    const condition = queryStringParser.ConditionBuilder(this.request.url.params, this.env.CLASSES, this.token.rootDir);
+    const condition = conditionBuilder.ConditionBuilder(this.request.url.params, this.env.CLASSES, this.token.rootDir);
     const ClassConstructor = condition.class;
     const classInstance = new ClassConstructor();
-    const select = queryStringParser.prepare.fields(ClassConstructor, this.request.url.query.fields);
-    const order = queryStringParser.prepare.orderBy(ClassConstructor, this.request.url.query.order);
-    const paging = queryStringParser.prepare.page(ClassConstructor, parseInt(this.request.url.query['page[number]'], 10), parseInt(this.request.url.query['page[size]'], 10));
+    const select = qsPrep.fields(ClassConstructor, this.request.url.query.fields);
+    const order = qsPrep.orderBy(ClassConstructor, this.request.url.query.order);
+    const paging = qsPrep.page(ClassConstructor, parseInt(this.request.url.query['page[number]'], 10), parseInt(this.request.url.query['page[size]'], 10));
 
     condition.cond = condition.cond.concat(ClassConstructor.getCondition(token));
 
-    const filter = queryStringParser.prepare.filter(ClassConstructor, this.request.url.query.filter);
+    const filter = qsPrep.filter(ClassConstructor, this.request.url.query.filter);
     condition.cond = condition.cond.concat(filter);
 
     // condition, select, order, from, limit

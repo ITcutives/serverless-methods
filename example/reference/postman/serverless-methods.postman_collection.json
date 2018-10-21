@@ -1,0 +1,489 @@
+{
+	"info": {
+		"_postman_id": "d0b1ed0a-c2f6-4e25-8192-aeed8a747642",
+		"name": "serverless-methods",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "users - Permission Denied for Manish",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6ImFzaGlzaCIsImlhdCI6MTUxNjIzOTAyMn0.A_HEN6jhmIiQqgl-dt5L70FlzYM1GEesswfUxWr0dl8"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"users\": [\n        {\n            \"id\": \"ashish\",\n            \"type\": \"USER\",\n            \"attributes\": {}\n        },\n        {\n            \"id\": \"manish\",\n            \"type\": \"USER\",\n            \"attributes\": {}\n        }\n    ]\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3000/v1/users/ashish,manish",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"v1",
+						"users",
+						"ashish,manish"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "edit: users",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"users\": [\n        {\n            \"id\": \"ashish\",\n            \"type\": \"USER\",\n            \"attributes\": {\n            \t\"test\": 1\n            }\n        }\n    ]\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3000/v1/users/ashish",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"v1",
+						"users",
+						"ashish"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "add:article",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"articles\": [\n        {\n            \"post\": {\n            \t\"test\": 1\n            },\n            \"links\": {\n            \t\"users\": \"ashish\"\n            }\n        }\n    ]\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3000/v1/articles",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"v1",
+						"articles"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "add:article - permission denied",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"articles\": [\n        {\n            \"post\": {\n            \t\"test\": 1\n            },\n            \"links\": {\n            \t\"users\": \"manish\"\n            }\n        }\n    ]\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3000/v1/articles",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"v1",
+						"articles"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "edit:article",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"articles\": [\n        {\n        \t\"id\": \"1\",\n            \"post\": {\n            \t\"title\": \"Title\"\n            },\n            \"links\": {\n            \t\"users\": \"ashish\"\n            }\n        }\n    ]\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3000/v1/articles/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"v1",
+						"articles",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "edit:article - permission denied",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"articles\": [\n        {\n        \t\"id\": \"2\",\n            \"post\": {\n            \t\"test\": 2\n            },\n            \"links\": {\n            \t\"users\": \"ashish\"\n            }\n        }\n    ]\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3000/v1/articles/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"v1",
+						"articles",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get: All Articles",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"articles\": [\n        {\n        \t\"id\": \"2\",\n            \"post\": {\n            \t\"test\": 2\n            },\n            \"links\": {\n            \t\"users\": \"ashish\"\n            }\n        }\n    ]\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3000/v1/articles",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"v1",
+						"articles"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get: All Users",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"articles\": [\n        {\n        \t\"id\": \"2\",\n            \"post\": {\n            \t\"test\": 2\n            },\n            \"links\": {\n            \t\"users\": \"ashish\"\n            }\n        }\n    ]\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3000/v1/users",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"v1",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get: Article-5bc17a7e5577530f837ccc8a",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"articles\": [\n        {\n        \t\"id\": \"2\",\n            \"post\": {\n            \t\"test\": 2\n            },\n            \"links\": {\n            \t\"users\": \"ashish\"\n            }\n        }\n    ]\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3000/v1/articles/5bc17a7e5577530f837ccc8a",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"v1",
+						"articles",
+						"5bc17a7e5577530f837ccc8a"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get: User - Ashish",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"articles\": [\n        {\n        \t\"id\": \"2\",\n            \"post\": {\n            \t\"test\": 2\n            },\n            \"links\": {\n            \t\"users\": \"ashish\"\n            }\n        }\n    ]\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3000/v1/users/ashish",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"v1",
+						"users",
+						"ashish"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get: Articles for User - Ashish",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"articles\": [\n        {\n        \t\"id\": \"2\",\n            \"post\": {\n            \t\"test\": 2\n            },\n            \"links\": {\n            \t\"users\": \"ashish\"\n            }\n        }\n    ]\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3000/v1/users/ashish/articles",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"v1",
+						"users",
+						"ashish",
+						"articles"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get: User for Article-5bc17a7e5577530f837ccc8a",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"articles\": [\n        {\n        \t\"id\": \"2\",\n            \"post\": {\n            \t\"test\": 2\n            },\n            \"links\": {\n            \t\"users\": \"ashish\"\n            }\n        }\n    ]\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3000/v1/articles/5bc2b172103f3d12f01dcfd8/users",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"v1",
+						"articles",
+						"5bc2b172103f3d12f01dcfd8",
+						"users"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{authToken}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "83d463fa-b8c5-4c80-aec0-c95b95bb6247",
+				"type": "text/javascript",
+				"exec": [
+					"function base64url(source) {",
+					"\t// Encode in classical base64",
+					"\tencodedSource = CryptoJS.enc.Base64.stringify(source);",
+					"",
+					"\t// Remove padding equal characters",
+					"\tencodedSource = encodedSource.replace(/=+$/, '');",
+					"",
+					"\t// Replace characters according to base64url specifications",
+					"\tencodedSource = encodedSource.replace(/\\+/g, '-');",
+					"\tencodedSource = encodedSource.replace(/\\//g, '_');",
+					"",
+					"\treturn encodedSource;",
+					"}",
+					"",
+					"function addIAT(request) {",
+					"\tvar iat = Math.floor(Date.now() / 1000) + 257;",
+					"\tdata.iat = iat;",
+					"\treturn data;",
+					"}",
+					"",
+					"",
+					"var header = {",
+					"\t\"typ\": \"JWT\",",
+					"\t\"alg\": \"HS256\"",
+					"};",
+					"",
+					"var data = {",
+					"\t\"iss\": pm.environment.get(\"API_ISSUER\")",
+					"};",
+					"",
+					"data = addIAT(data);",
+					"",
+					"var secret = atob(pm.environment.get(\"API_KEY\"));",
+					"",
+					"// encode header",
+					"var stringifiedHeader = CryptoJS.enc.Utf8.parse(JSON.stringify(header));",
+					"var encodedHeader = base64url(stringifiedHeader);",
+					"",
+					"// encode data",
+					"var stringifiedData = CryptoJS.enc.Utf8.parse(JSON.stringify(data));",
+					"var encodedData = base64url(stringifiedData);",
+					"",
+					"// build token",
+					"var token = encodedHeader + \".\" + encodedData;",
+					"",
+					"// sign token",
+					"var signature = CryptoJS.HmacSHA256(token, secret);",
+					"signature = base64url(signature);",
+					"var signedToken = token + \".\" + signature;",
+					"",
+					"postman.setEnvironmentVariable(\"authToken\", signedToken);",
+					"",
+					"",
+					"",
+					"",
+					"",
+					"// var removeIllegalCharacters = function(input) {",
+					"//     return input",
+					"//         .replace(/=/g, '')",
+					"//         .replace(/\\+/g, '-')",
+					"//         .replace(/\\//g, '_');",
+					"// };",
+					"",
+					"// var base64object = function(input) {",
+					"//     var inputWords = CryptoJS.enc.Utf8.parse(JSON.stringify(input));",
+					"//     var base64 = CryptoJS.enc.Base64.stringify(inputWords);",
+					"//     var output = removeIllegalCharacters(base64);",
+					"//     return output;",
+					"// };",
+					"",
+					"// var url = request.url;",
+					"// var slashIndex = url.toLowerCase().startsWith('http') ? 8 : 0;",
+					"// var path = url.substring(url.indexOf('/', slashIndex), url.length);",
+					"",
+					"// var iat = Math.floor(Date.now() / 1000);",
+					"// var exp = iat + (60 * 1);",
+					"// var iss = pm.environment.get(\"API_ISSUER\");",
+					"// var header = { 'alg': 'HS256', 'typ': 'JWT' };",
+					"// var payload = { 'exp': exp, 'name': iss, 'iat': iat };",
+					"",
+					"// var unsignedToken = base64object(header) + \".\" + base64object(payload);",
+					"",
+					"// var signatureHash = CryptoJS.HmacSHA256(unsignedToken, pm.environment.get(\"API_KEY\"));",
+					"// var signature = CryptoJS.enc.Base64.stringify(signatureHash);",
+					"// var token = unsignedToken + '.' + signature;",
+					"",
+					"// pm.environment.set('authToken', removeIllegalCharacters(token));"
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "1e25d1c8-3900-4f19-a9f5-2877c134a649",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
