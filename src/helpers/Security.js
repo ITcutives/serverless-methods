@@ -16,7 +16,7 @@ class Security {
   }
 
   // eslint-disable-next-line class-methods-use-this
-  UNAUTHORISED() {
+  async UNAUTHORISED() {
     throw Boom.unauthorized();
   }
 

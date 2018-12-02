@@ -232,6 +232,6 @@ const ConditionBuilder = (path, CLASSES, ModelPath) => {
 };
 
 module.exports = {
-  prepare: Prepare,
+  Prepare,
   ConditionBuilder,
 };
