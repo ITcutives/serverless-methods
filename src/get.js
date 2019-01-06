@@ -36,7 +36,7 @@ class Get extends Abstract {
 
     if (loIsEmpty(success)) {
       // internal server error
-      throw Boom.wrap(new Error(ErrorCodes.E0012_INTERNAL_ERROR), 500);
+      throw Boom.boomify(new Error(ErrorCodes.E0012_INTERNAL_ERROR), 500);
     }
     const rtn = {};
     const status = success.length === 0 ? 404 : 200;
