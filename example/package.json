@@ -21,11 +21,11 @@
   "dependencies": {
     "@itcutives/adapter-mongo": "file:../../adapter-mongo",
     "@itcutives/adapter-mysql": "git+https://github.com/ITcutives/adapter-mysql.git",
-    "@itcutives/serverless-helpers": "^1.1.0",
+    "@itcutives/serverless-helpers": "^2.0.1",
     "boom": "^7.2.0",
     "jsonwebtoken": "^8.3.0"
   },
   "devDependencies": {
-    "serverless-offline": "^3.27.0"
+    "serverless-offline": "^4.1.4"
   }
 }
