@@ -26,6 +26,10 @@ class Get extends Abstract {
 
     // condition, select, order, from, limit
     const queryResult = await classInstance.SELECT(condition.cond, select.fields, order, paging.from, paging.limit);
+    // if there are no record found
+    if (queryResult.length <= 0) {
+      throw Boom.notFound(ErrorCodes.E0015_NO_MATCHING_RECORD);
+    }
     const afterPermissionChecked = await mapReflect(queryResult.map(o => token.isAllowed(ClassConstructor.PLURAL, 'get', o)));
 
     if (afterPermissionChecked.length <= 0) {

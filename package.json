@@ -3,14 +3,11 @@
   "version": "1.0.0",
   "description": "Serverless HTTP Method handlers",
   "main": "index.js",
-  "directories": {
-    "test": "npm run lint && mocha --recursive"
-  },
   "scripts": {
     "test": ".travis.yml",
-    "coverage": "./node_modules/.bin/nyc --reporter=lcov --reporter=text npm test",
-    "lint": "npx eslint .",
-    "start": "npx sls offline start"
+    "lint": "eslint .",
+    "start": "./example/bin/local.sh",
+    "e2e": "./example/bin/e2e.sh"
   },
   "repository": {
     "type": "git",
@@ -30,16 +27,15 @@
   },
   "homepage": "https://github.com/ITcutives/serverless-methods#readme",
   "devDependencies": {
-    "eslint": "^5.12.0",
+    "eslint": "^5.15.1",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-plugin-import": "^2.14.0",
-    "mocha": "^5.2.0",
-    "nyc": "^13.1.0",
-    "serverless-offline": "^4.1.4"
+    "mongodb": "^3.1.13",
+    "serverless-offline": "^4.8.1"
   },
   "dependencies": {
     "boom": "^7.3.0",
-    "jsonwebtoken": "^8.4.0",
+    "jsonwebtoken": "^8.5.0",
     "lodash": "^4.17.11"
   }
 }

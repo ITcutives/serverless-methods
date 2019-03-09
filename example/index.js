@@ -1,14 +1,14 @@
 /**
  * Created by ashish on 29/05/2018.
  */
+const path = require('path');
 const REQ = require('@itcutives/serverless-helpers/src/request');
 const RES = require('@itcutives/serverless-helpers/src/response');
-const { finish, errorHandler } = require('@itcutives/serverless-helpers/src/lambdaCallbackHandler');
-
+const ResponseHandler = require('./src/helpers/lambdaResponseFormatter');
 const Token = require('../src/helpers/token');
 
-const Config = require('./helpers/config');
-const DB = require('./helpers/db.provider').Mongo;
+const Config = require('./src/helpers/config');
+const DB = require('./src/helpers/db.provider').Mongo;
 
 /**
  * @param event
@@ -20,22 +20,17 @@ module.exports.handler = (event, context, cb) => {
   const response = new RES();
   let handler;
 
-  Token.Handler(request.headers.authorization, Config.AUTH0)
-    .then(token => DB.CONNECT(Config.MONGO).then(() => token.prepare()))
+  Token.Handler(request.headers.authorization, Config.JWT_SECRET)
+    .then(token => DB.CONNECT(Config.DB).then(() => token.prepare()))
     .then((token) => {
-      if (!token) {
-        response.respond(403, { error: 'permission denied' });
-        return finish(cb, response.statusCode, response.body, response.headers);
-      }
-
       // eslint-disable-next-line no-param-reassign
-      token.rootDir = __dirname;
+      token.rootDir = path.join(__dirname, 'src');
       request.setToken(token);
 
-      const Get = require(`../src/${request.method}`);
-      handler = new Get(request, response, Config, token);
+      const Method = require(`../src/${request.method}`);
+      handler = new Method(request, response, Config, token);
       return handler.handle();
     })
-    .then(resp => finish(cb, resp.statusCode, resp.body, resp.headers))
-    .catch(error => errorHandler(cb, error));
+    .then(resp => ResponseHandler.finish(cb, resp))
+    .catch(error => ResponseHandler.errorHandler(cb, error));
 };

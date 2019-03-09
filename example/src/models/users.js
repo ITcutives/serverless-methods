@@ -19,15 +19,15 @@ class User extends Abstract {
     return 'USER';
   }
 
-  static get SUPER() {
-    return 'SUPER';
+  static get ADMIN() {
+    return 'ADMIN';
   }
 
   /**
    * @returns {Array}
    */
   static get FIELDS() {
-    return ['id', 'type', 'attributes'];
+    return ['id', 'email', 'type', 'attributes'];
   }
 
   /**
@@ -48,6 +48,11 @@ class User extends Abstract {
     return {
       attributes: 'json',
     };
+  }
+
+  INSERT() {
+    this.set('type', User.USER);
+    return super.INSERT();
   }
 }
 

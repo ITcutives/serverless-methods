@@ -7,11 +7,11 @@ const AdapterMongo = require('@itcutives/adapter-mongo/src/adapter');
 const ConnectMongo = require('@itcutives/adapter-mongo/src/connection');
 
 class MySQL extends Adapter {
-  static CONNECT(config) {
+  static async CONNECT(config) {
     if (!MySQL.CONN) {
       MySQL.CONN = new Connect(config);
     }
-    return Promise.resolve(MySQL.CONN);
+    return MySQL.CONN;
   }
 
   // eslint-disable-next-line no-unused-vars
@@ -21,11 +21,11 @@ class MySQL extends Adapter {
 }
 
 class Mongo extends AdapterMongo {
-  static CONNECT(config) {
+  static async CONNECT(config) {
     if (!Mongo.CONN) {
       Mongo.CONN = new ConnectMongo(config);
     }
-    return Promise.resolve(Mongo.CONN);
+    return Mongo.CONN;
   }
 
   // eslint-disable-next-line no-unused-vars

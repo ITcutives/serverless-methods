@@ -12,5 +12,6 @@
   "E0011_PERMISSION_READ": "E0011:You are not allowed to read one or more resources",
   "E0012_INTERNAL_ERROR": "E0012:Internal server error",
   "E0013_BAD_ENTITY_NAME": "E0013:Bad resource name",
-  "E0014_BAD_ENTITY_RELATIONSHIP": "E0014:Bad entity relationship"
+  "E0014_BAD_ENTITY_RELATIONSHIP": "E0014:Bad entity relationship",
+  "E0015_NO_MATCHING_RECORD": "E0015:No matching record found"
 }

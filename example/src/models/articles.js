@@ -40,6 +40,7 @@ class Article extends Abstract {
   static get SERIALIZED() {
     return {
       post: 'json',
+      user_id: 'objectId',
     };
   }
 
@@ -55,7 +56,7 @@ class Article extends Abstract {
   UPDATE() {
     Article.LINKS.forEach((link) => {
       const col = link.LINK;
-      if (this.get(col) && this.get(col) !== this.original.get(col)) {
+      if (this.get(col) && this.get(col) !== this.original.get(col).toString()) {
         throw Boom.expectationFailed(`missing linking information (${link.PLURAL})`);
       }
     });

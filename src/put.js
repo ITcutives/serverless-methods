@@ -126,7 +126,7 @@ class Put extends Abstract {
     };
 
     if (dbEntries.length > 0 && errors.length >= 0) {
-      rtn.status = 200;
+      rtn.status = (operation === 'CREATE') ? 201 : 200;
     } else if (errors.length > 0 && dbEntries.length === 0) {
       rtn.status = 400;
       rtn.plural = 'error';

@@ -26,7 +26,7 @@ class Delete extends Abstract {
     }
     let record = records[0];
     record = await this.token.isAllowed(ClassConstructor.PLURAL, 'delete', record);
-    record.DELETE();
+    await record.DELETE();
     return this.response.respond(204, undefined);
   }
 }

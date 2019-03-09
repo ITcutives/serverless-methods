@@ -44,36 +44,39 @@ class Token {
     const headerPart = authorization.split(' ');
 
     const t = new Token();
-    if (headerPart[0] === 'Bearer') {
-      t.authorisationType = Token.AUTH0;
-      await t.verifyJwt(headerPart[1], auth0, 'base64');
-    } else if (headerPart[0] === 'Token') {
-      t.authorisationType = Token.KEY;
-      await t.decodeJwt(headerPart[1]);
-    } else {
+    try {
+      if (headerPart[0] === 'Bearer') {
+        await t.verifyJwt(headerPart[1], auth0, 'base64');
+        t.authorisationType = Token.AUTH0;
+      } else if (headerPart[0] === 'Token') {
+        await t.decodeJwt(headerPart[1]);
+        t.authorisationType = Token.KEY;
+      }
+    } catch (e) {
       t.authorisationType = Token.UNAUTHORISED;
+      console.error(e);
     }
-    return Promise.resolve(t);
+    return t;
   }
 
-  verifyJwt(jwt, auth0, encoding) {
+  async verifyJwt(jwt, auth0, encoding) {
     const secret = Buffer.from(auth0, encoding);
     this.decoded = JWT.verify(jwt, secret);
-    return Promise.resolve(this);
+    return this;
   }
 
-  decodeJwt(jwt) {
+  async decodeJwt(jwt) {
     this.decoded = JWT.decode(jwt);
-    return Promise.resolve(this);
+    return this;
   }
 
-  prepare() {
+  async prepare() {
     switch (this.authorisation) {
       case Token.AUTH0:
       case Token.KEY:
         break;
     }
-    return Promise.resolve(this);
+    return this;
   }
 
   isAllowed(plural, action, object) {
@@ -85,7 +88,9 @@ class Token {
   getPermission() {
     if (this.authorisation === Token.UNAUTHORISED) {
       return 'UNAUTHORISED';
-    } if (this.isSuper === true) {
+    }
+
+    if (this.isSuper === true) {
       return 'SUPER';
     }
     return 'ADMIN';

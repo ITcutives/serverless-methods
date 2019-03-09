@@ -3,11 +3,11 @@
   "version": "1.0.0",
   "description": "Serverless Example",
   "main": "index.js",
-  "directories": {
+  "scripts": {
     "test": "npm run lint && mocha --recursive",
-    "coverage": "./node_modules/.bin/nyc --reporter=lcov --reporter=text npm test",
     "lint": "eslint .",
-    "run:local": "sls offline start"
+    "start": "./bin/local.sh",
+    "e2e": "./bin/e2e.sh"
   },
   "keywords": [
     "serverless",
@@ -19,13 +19,13 @@
   "author": "Ashish Tilara <ashish@itcutives.com>",
   "license": "MIT",
   "dependencies": {
-    "@itcutives/adapter-mongo": "file:../../adapter-mongo",
+    "@itcutives/adapter-mongo": "git+https://github.com/ITcutives/adapter-mongo.git",
     "@itcutives/adapter-mysql": "git+https://github.com/ITcutives/adapter-mysql.git",
     "@itcutives/serverless-helpers": "^2.0.1",
-    "boom": "^7.2.0",
-    "jsonwebtoken": "^8.3.0"
+    "boom": "^7.3.0",
+    "jsonwebtoken": "^8.5.0"
   },
   "devDependencies": {
-    "serverless-offline": "^4.1.4"
+    "serverless-offline": "^4.8.1"
   }
 }
