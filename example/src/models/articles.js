@@ -39,6 +39,7 @@ class Article extends Abstract {
    */
   static get SERIALIZED() {
     return {
+      id: 'objectId',
       post: 'json',
       user_id: 'objectId',
     };

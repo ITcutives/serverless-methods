@@ -22,8 +22,12 @@ class Request {
     return `Bearer ${JWT.sign(obj, this.config.jwt.key)}`;
   }
 
-  GET(entity, id) {
-    return this.request('GET', `${this.config.path}/${entity}${id ? `/${id}` : ''}`);
+  GET(entity, id, relationship = '') {
+    let url = `${this.config.path}/${entity}${id ? `/${id}` : ''}`;
+    if (relationship !== '' && id) {
+      url = `${this.config.path}/${relationship}/${id}/${entity}`;
+    }
+    return this.request('GET', url);
   }
 
   PUT(entity, request, id = null) {

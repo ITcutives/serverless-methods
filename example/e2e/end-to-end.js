@@ -126,7 +126,7 @@ const r = new Request(config);
    *  5. GET /users - 200 Success return user
    *  6. GET /articles - 200 Success return article
    */
-  users = await r.GET('users', userId);
+  users = await r.GET('users', articleId, 'articles');
   assert.deepEqual(users.body.users[0], {
     email: 'ashish@itcutives.com',
     attributes: {
@@ -140,9 +140,9 @@ const r = new Request(config);
       ],
     },
   });
-  console.log('PASS \t GET /users/:id');
+  console.log('PASS \t GET /articles/:article-id/user');
   // -----------------------------------------------
-  articles = await r.GET('articles', articleId);
+  articles = await r.GET('articles', userId, 'users');
   assert.deepEqual(articles.body.articles[0], {
     post: {
       title: 'my new article',
@@ -153,7 +153,7 @@ const r = new Request(config);
       users: userId,
     },
   });
-  console.log('PASS \t GET /articles/:id');
+  console.log('PASS \t GET /users/:user-id/articles');
 
   /**
    *  7. GET /users/:id - 200 Success return user

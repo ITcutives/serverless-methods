@@ -46,6 +46,7 @@ class User extends Abstract {
    */
   static get SERIALIZED() {
     return {
+      id: 'objectId',
       attributes: 'json',
     };
   }
