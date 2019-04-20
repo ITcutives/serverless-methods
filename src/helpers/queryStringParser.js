@@ -8,6 +8,7 @@ const loIsArray = require('lodash/isArray');
 const loMap = require('lodash/map');
 const loTrim = require('lodash/trim');
 const loForEach = require('lodash/forEach');
+const loGet = require('lodash/get');
 const loFind = require('lodash/find');
 
 const { validateEntityName } = require('./common');
@@ -44,7 +45,7 @@ class Prepare {
           // no code
         }
       }
-      const f = c.field.split('.');
+      const f = (c.field || '').split('.');
       if (cls.FIELDS.indexOf(f[0]) !== -1) {
         finalFilters.push(c);
       }
@@ -114,51 +115,39 @@ class Prepare {
    * @param qsOrder
    * @returns {*}
    */
-  static orderBy(cls, qsOrder) {
-    let rtn;
+  static orderBy(cls, qsOrder = '') {
     const actualFields = cls.FIELDS;
     if (!qsOrder) {
-      return '';
-    }
-    if (typeof qsOrder === 'string') {
-      qsOrder = loMap(qsOrder.split(','), v => loTrim(v));
+      return [];
     }
 
-    if (loIsArray(qsOrder)) {
-      rtn = qsOrder.filter((q) => {
-        if (q.indexOf('-') === 0) {
-          return (actualFields.indexOf(q.substr(1)) !== -1);
-        }
-        return (actualFields.indexOf(q) !== -1);
-      });
-    } else {
-      rtn = {};
-      loForEach(qsOrder, (v, k) => {
-        if (actualFields.indexOf(k) !== -1) {
-          rtn[k] = v;
-        }
-      });
-    }
-    return rtn;
+    qsOrder = loMap(qsOrder.split(','), v => loTrim(v));
+
+    return qsOrder.filter((q) => {
+      if (q.indexOf('-') === 0) {
+        return (actualFields.indexOf(q.substr(1)) !== -1);
+      }
+      return (actualFields.indexOf(q) !== -1);
+    });
   }
 
   /**
    * @param cls
-   * @param qsPage
-   * @param qsLimit
-   * @returns {{from: undefined, limit: *}|*}
+   * @param page
+   * @param limit
+   * @returns {{limit: *, from: undefined}}
    */
-  static page(cls, qsPage, qsLimit) {
-    if (!qsLimit) {
-      qsLimit = cls.PAGESIZE;
+  static page(cls, { page, size }) {
+    if (!size) {
+      size = cls.PAGESIZE;
     }
-    const limit = { from: undefined, limit: qsLimit };
+    const rtn = { from: undefined, limit: size };
     // 0-999
     // 1000-1999
-    if (qsPage) {
-      limit.from = (qsPage - 1) * qsLimit;
+    if (page) {
+      rtn.from = (page - 1) * size;
     }
-    return limit;
+    return rtn;
   }
 }
 
@@ -179,36 +168,40 @@ const ConditionBuilder = (path, CLASSES, ModelPath) => {
     }
 
     const link = loFind(returnv.class.LINKS, v => v.PLURAL === path.parent);
-    if (!link) {
-      throw Boom.badRequest(ErrorCodes.E0014_BAD_ENTITY_RELATIONSHIP);
-    }
 
-    if (link.TYPE === '1TO1') {
-      returnv.cond.push({
-        field: link.LINK,
-        value: path.id,
-      });
-    } else if (link.TYPE === '1TOM') {
-      returnv.cond.push({
-        field: 'id',
-        operator: 'in',
-        value: {
-          class: require(`${ModelPath}/models/${path.parent}`),
-          condition: { id: path.id },
-          select: link.LINK,
-        },
-      });
-    } else if (link.TYPE === 'MTOM') {
-      returnv.cond.push({
-        field: 'id',
-        operator: 'in',
-        value: {
-          table: link.JOIN,
-          condition: {},
-          select: link.CHILD,
-        },
-      });
-      returnv.cond[0].value.condition[link.LINK] = path.id;
+    switch (loGet(link, 'TYPE')) {
+      case '1TO1':
+        returnv.cond.push({
+          field: link.LINK,
+          value: path.id,
+        });
+        break;
+      case '1TOM':
+        returnv.cond.push({
+          field: 'id',
+          operator: 'in',
+          value: {
+            class: require(`${ModelPath}/models/${path.parent}`),
+            condition: { id: path.id },
+            select: link.LINK,
+          },
+        });
+        break;
+      case 'MTOM':
+        returnv.cond.push({
+          field: 'id',
+          operator: 'in',
+          value: {
+            table: link.JOIN,
+            condition: {
+              [link.LINK]: path.id,
+            },
+            select: link.CHILD,
+          },
+        });
+        break;
+      default:
+        throw Boom.badRequest(ErrorCodes.E0014_BAD_ENTITY_RELATIONSHIP);
     }
   } else {
     // validate the class name

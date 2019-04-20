@@ -2,7 +2,7 @@ module.exports = {
   'extends': 'airbnb-base',
   'plugins': [],
   'env': {
-    'mocha': true
+    'jest': true
   },
   'rules': {
     'max-len': 0,

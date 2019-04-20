@@ -3,6 +3,7 @@
  */
 const Boom = require('boom');
 const loIsEmpty = require('lodash/isEmpty');
+const loGet = require('lodash/get');
 const ErrorCodes = require('./helpers/error-codes.json');
 const { mapReflect } = require('./helpers/common');
 const { ConditionBuilder, Prepare } = require('./helpers/queryStringParser');
@@ -15,9 +16,12 @@ class Get extends Abstract {
     const condition = ConditionBuilder(this.request.url.params, this.env.CLASSES, this.token.rootDir);
     const ClassConstructor = condition.class;
     const classInstance = new ClassConstructor();
-    const select = Prepare.fields(ClassConstructor, this.request.url.query.fields);
-    const order = Prepare.orderBy(ClassConstructor, this.request.url.query.order);
-    const paging = Prepare.page(ClassConstructor, parseInt(this.request.url.query['page[number]'], 10), parseInt(this.request.url.query['page[size]'], 10));
+    const select = Prepare.fields(ClassConstructor, loGet(this, 'request.url.query.fields'));
+    const order = Prepare.orderBy(ClassConstructor, loGet(this, 'request.url.query.order'));
+    const paging = Prepare.page(ClassConstructor, {
+      number: parseInt(loGet(this, 'request.url.query.page.number'), 10),
+      size: parseInt(loGet(this, 'request.url.query.page.size'), 10),
+    });
 
     condition.cond = condition.cond.concat(ClassConstructor.getCondition(token));
 
