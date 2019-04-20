@@ -12,25 +12,24 @@ const DB = require('./src/helpers/db.provider').Mongo;
 
 /**
  * @param event
- * @param context
- * @param cb
  */
-module.exports.handler = (event, context, cb) => {
+module.exports.handler = async (event) => {
   const request = REQ.normaliseLambdaRequest(event);
   const response = new RES();
   let handler;
+  let token;
 
-  Token.Handler(request.headers.authorization, Config.JWT_SECRET)
-    .then(token => DB.CONNECT(Config.DB).then(() => token.prepare()))
-    .then((token) => {
-      // eslint-disable-next-line no-param-reassign
-      token.rootDir = path.join(__dirname, 'src');
-      request.setToken(token);
-
-      const Method = require(`../src/${request.method}`);
-      handler = new Method(request, response, Config, token);
-      return handler.handle();
-    })
-    .then(resp => ResponseHandler.finish(cb, resp))
-    .catch(error => ResponseHandler.errorHandler(cb, error));
+  try {
+    token = await Token.Handler(request.headers.authorization, Config.JWT_SECRET);
+    await DB.CONNECT(Config.DB);
+    await token.prepare();
+    token.rootDir = path.join(__dirname, 'src');
+    request.setToken(token);
+    const Method = require(`../src/${request.method}`);
+    handler = new Method(request, response, Config, token);
+    const resp = await handler.handle();
+    return ResponseHandler.responseHandler(resp);
+  } catch (e) {
+    return ResponseHandler.errorHandler(e);
+  }
 };
