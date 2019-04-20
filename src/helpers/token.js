@@ -71,10 +71,8 @@ class Token {
   }
 
   async prepare() {
-    switch (this.authorisation) {
-      case Token.AUTH0:
-      case Token.KEY:
-        break;
+    if (this.authorisation === Token.AUTH0 || this.authorisation === Token.KEY) {
+      // no code
     }
     return this;
   }

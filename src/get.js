@@ -50,7 +50,6 @@ class Get extends Abstract {
     const status = success.length === 0 ? 404 : 200;
     rtn[ClassConstructor.PLURAL] = success;
     return this.response.respond(status, rtn);
-
   }
 }
 

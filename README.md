@@ -6,6 +6,8 @@
 
 ### HEAD
 
+- not implemented
+
 ### GET
 
 #### QueryString
@@ -30,12 +32,19 @@
 
 ### POST
 
+- not implemented
+
 ### PUT
+
+- create/update object
 
 ### PATCH
 
+- not implemented
+
 ### DELETE
 
+- delete is only allowed for one resource object at a time.
 
 ## Required Project Structure
 

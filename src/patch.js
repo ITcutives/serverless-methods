@@ -4,9 +4,9 @@
 const Abstract = require('./abstract');
 
 class Patch extends Abstract {
-  validator() {
-
-  }
+  // validator() {
+  //
+  // }
 
   async handle() {
     return this.response.respond(200, this.request);

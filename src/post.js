@@ -4,9 +4,9 @@
 const Abstract = require('./abstract');
 
 class Post extends Abstract {
-  validate() {
-
-  }
+  // validate() {
+  //
+  // }
 
   async handle() {
     return this.response.respond(200, this.request);
