@@ -5,37 +5,48 @@ provider:
   runtime: nodejs8.10
   stage: dev
   region: ap-southeast-2
+  timeout: 1
 
 plugins:
-- serverless-offline
+  - serverless-offline
 
 functions:
   index:
     handler: example/index.handler
     events:
-    - http:
-        path: v1/{parent}/{id}
-        method: put
-        cors: true
-    - http:
-        path: v1/{parent}
-        method: put
-        cors: true
-    #---------------------------------------
-    - http:
-        path: v1/{parent}/{id}/{association}
-        method: get
-        cors: true
-    - http:
-        path: v1/{parent}/{id}
-        method: get
-        cors: true
-    - http:
-        path: v1/{parent}
-        method: get
-        cors: true
-    #---------------------------------------
-    - http:
-        path: v1/{parent}/{id}
-        method: delete
-        cors: true
+      - http:
+          path: v1/{parent}/{id}
+          method: put
+          cors: true
+      - http:
+          path: v1/{parent}
+          method: put
+          cors: true
+      #---------------------------------------
+      - http:
+          path: v1/{parent}
+          method: post
+          cors: true
+      #---------------------------------------
+      - http:
+          path: v1/{parent}/{id}
+          method: patch
+          cors: true
+      #---------------------------------------
+      - http:
+          path: v1/{parent}/{id}/{association}
+          method: get
+          cors: true
+      - http:
+          path: v1/{parent}/{id}
+          method: get
+          cors: true
+      - http:
+          path: v1/{parent}
+          method: get
+          cors: true
+      #---------------------------------------
+      - http:
+          path: v1/{parent}/{id}
+          method: delete
+          cors: true

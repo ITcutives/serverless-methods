@@ -91,7 +91,7 @@ class Token {
     if (this.isSuper === true) {
       return 'SUPER';
     }
-    return 'ADMIN';
+    return 'USER';
   }
 }
 

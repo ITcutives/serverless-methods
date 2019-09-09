@@ -34,6 +34,14 @@ class Request {
     return this.request('PUT', `${this.config.path}/${entity}${id ? `/${id}` : ''}`, { [entity]: [request] });
   }
 
+  POST(entity, request) {
+    return this.request('POST', `${this.config.path}/${entity}`, { [entity]: request });
+  }
+
+  PATCH(entity, request, id = null) {
+    return this.request('PATCH', `${this.config.path}/${entity}${id ? `/${id}` : ''}`, { [entity]: request });
+  }
+
   DELETE(entity, id) {
     return this.request('DELETE', `${this.config.path}/${entity}/${id}`);
   }

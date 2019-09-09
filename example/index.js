@@ -13,7 +13,10 @@ const DB = require('./src/helpers/db.provider').Mongo;
 /**
  * @param event
  */
-module.exports.handler = async (event) => {
+module.exports.handler = async (event, context) => {
+  // eslint-disable-next-line no-param-reassign
+  context.callbackWaitsForEmptyEventLoop = false;
+
   const request = REQ.normaliseLambdaRequest(event);
   const response = new RES();
   let handler;
@@ -28,8 +31,9 @@ module.exports.handler = async (event) => {
     const Method = require(`../src/${request.method}`);
     handler = new Method(request, response, Config, token);
     const resp = await handler.handle();
-    return ResponseHandler.responseHandler(resp);
+    return await ResponseHandler.responseHandler(resp);
   } catch (e) {
-    return ResponseHandler.errorHandler(e);
+    // eslint-disable-next-line no-return-await
+    return await ResponseHandler.errorHandler(e);
   }
 };

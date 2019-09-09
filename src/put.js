@@ -60,10 +60,10 @@ class Put extends Abstract {
 
     if (id) {
       operation = 'UPDATE';
-      ids = decodeURIComponent(id).split(',').map(v => v.toString());
+      ids = decodeURIComponent(id).split(',').map((v) => v.toString());
 
       // content supplied and id list should match appropriately
-      const filtered = content.filter(object => ids.includes(object.id));
+      const filtered = content.filter((object) => ids.includes(object.id));
 
       if (filtered.length <= 0) {
         throw Boom.badRequest(ErrorCodes.E0005_URL_ID_MISMATCH_WITH_OBJECT_ID);
@@ -88,7 +88,7 @@ class Put extends Abstract {
       }
     }
 
-    const classInstances = await Promise.all(content.map(resource => ClassConstructor.fromLink(ClassConstructor, resource)));
+    const classInstances = await Promise.all(content.map((resource) => ClassConstructor.fromLink(ClassConstructor, resource)));
 
     if (operation === 'UPDATE') {
       const validIds = loFilter(classInstances.map(o => o.get('id')), o => o !== undefined);
@@ -99,25 +99,25 @@ class Put extends Abstract {
       });
 
       try {
-        operationResult = await Promise.all(updatedClassInstances.map(o => token.isAllowed(ClassConstructor.PLURAL, 'edit', o)));
-        ids = await mapReflect(operationResult.map(instance => instance.UPDATE().then(() => instance.get('id'))));
+        operationResult = await Promise.all(updatedClassInstances.map((o) => token.isAllowed(ClassConstructor.PLURAL, 'edit', o)));
+        ids = await mapReflect(operationResult.map((instance) => instance.UPDATE().then(() => instance.get('id'))));
       } catch (e) {
         throw Boom.forbidden(ErrorCodes.E0009_PERMISSION_UPDATE, e);
       }
     } else if (operation === 'CREATE') {
       try {
-        operationResult = await Promise.all(classInstances.map(o => token.isAllowed(ClassConstructor.PLURAL, 'create', o)));
-        ids = await mapReflect(operationResult.map(instance => instance.INSERT()));
+        operationResult = await Promise.all(classInstances.map((o) => token.isAllowed(ClassConstructor.PLURAL, 'create', o)));
+        ids = await mapReflect(operationResult.map((instance) => instance.INSERT()));
       } catch (e) {
         throw Boom.forbidden(ErrorCodes.E0010_PERMISSION_INSERT, e);
       }
     }
 
-    const errors = ids.filter(i => i.status === 'rejected').map(i => ({ error: i.e.message }));
-    const updatedIds = ids.filter(i => i.status === 'resolved').map(i => i.v);
+    const errors = ids.filter(i => i.status === 'rejected').map((i) => ({ error: i.e.message }));
+    const updatedIds = ids.filter(i => i.status === 'resolved').map((i) => i.v);
     const updatedRecords = await Put.searchInDB(ClassConstructor, updatedIds);
 
-    const dbEntries = await Promise.all(updatedRecords.map(resource => resource.toLink(undefined, this.token.rootDir)));
+    const dbEntries = await Promise.all(updatedRecords.map((resource) => resource.toLink(undefined, this.token.rootDir)));
 
     const rtn = {
       status: undefined,
