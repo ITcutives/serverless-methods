@@ -50,7 +50,7 @@ class Request {
     const options = {
       method,
       host: this.config.host,
-      port: this.config.port,
+      port: this.config.port || 443,
       path,
       headers: {
         'Content-Type': 'application/json',

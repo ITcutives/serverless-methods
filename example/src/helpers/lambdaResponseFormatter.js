@@ -5,10 +5,6 @@ const LambdaResponseFormatter = require('@itcutives/serverless-helpers/src/lambd
 
 class ResponseHandler extends LambdaResponseFormatter {
   static async middleware() {
-    // const { Mongo } = require('./db.provider');
-    // if (Mongo.CONN) {
-    //   await Mongo.CONN.closeConnection();
-    // }
     return true;
   }
 }

@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
 export DEPLOYMENT_BUCKET=""
-export ENV=""
-export REGION=""
+export ENV="dev"
+export REGION="ap-southeast-2"
 
 export JWT_SECRET="YWJjZA=="
 
@@ -15,3 +15,4 @@ export DB_CONNECTIONLIMIT=""
 
 export DB_URL=""
 export DB_DB=""
+export DEBUG="true"

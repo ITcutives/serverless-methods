@@ -9,7 +9,8 @@
     "lint": "npx eslint .",
     "pretest": "npm run lint",
     "start": "./example/bin/local.sh",
-    "e2e": "./example/bin/e2e.sh"
+    "e2e": "./example/bin/e2e.sh",
+    "deploy": "./example/bin/deploy.sh"
   },
   "repository": {
     "type": "git",

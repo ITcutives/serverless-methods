@@ -2,10 +2,18 @@ service: serverless-example
 
 provider:
   name: aws
-  runtime: nodejs8.10
-  stage: dev
-  region: ap-southeast-2
-  timeout: 1
+  runtime: nodejs10.x
+  stage: ${env:ENV}
+  region: ${env:REGION}
+  timeout: 5
+  deploymentBucket:
+    name: ${env:DEPLOYMENT_BUCKET}
+    serverSideEncryption: AES256
+  environment:
+    DB_URL: ${env:DB_URL}
+    DB_DB: ${env:DB_DB}
+    JWT_SECRET: ${env:JWT_SECRET}
+    debug: ${env:DEBUG}
 
 plugins:
   - serverless-offline

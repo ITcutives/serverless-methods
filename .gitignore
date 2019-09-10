@@ -64,3 +64,4 @@ typings/
 example2
 example/src/security2
 temp
+.serverless
