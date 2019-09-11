@@ -29,6 +29,6 @@
   },
   "devDependencies": {
     "jest": "^24.7.1",
-    "serverless-offline": "^4.9.4"
+    "serverless-offline": "^5.11.0"
   }
 }
