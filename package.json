@@ -37,7 +37,7 @@
     "serverless-offline": "^5.11.0"
   },
   "dependencies": {
-    "@itcutives/adapter-mongo": "file:../adapter-mongo",
+    "@itcutives/adapter-mongo": "^1.0.0",
     "boom": "^7.3.0",
     "jsonwebtoken": "^8.5.1",
     "lodash": "^4.17.15",
