@@ -12,6 +12,7 @@ const DB = require('./src/helpers/db.provider').Mongo;
 
 /**
  * @param event
+ * @param context
  */
 module.exports.handler = async (event, context) => {
   // eslint-disable-next-line no-param-reassign
