@@ -1,0 +1,39 @@
+{
+  "name": "@itcutives/multi-tenant-api",
+  "version": "1.0.0",
+  "description": "ITcutives Multi-tenant API example",
+  "main": "index.js",
+  "scripts": {
+    "test": "npx jest",
+    "coverage": "npx jest --coverage",
+    "lint": "npx eslint .",
+    "pretest": "npm run lint",
+    "start": "./bin/local.sh",
+    "e2e": "./bin/e2e.sh",
+    "deploy": "./bin/deploy.sh"
+  },
+  "keywords": [
+    "serverless",
+    "http",
+    "methods",
+    "json-api",
+    "json"
+  ],
+  "author": "Ashish Tilara <ashish@itcutives.com>",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "@itcutives/adapter-mongo": "file:../../adapter-mongo",
+    "@itcutives/serverless-helpers": "^4.0.0",
+    "boom": "^7.3.0",
+    "jsonwebtoken": "^8.5.1",
+    "lodash": "^4.17.15"
+  },
+  "devDependencies": {
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb-base": "^14.1.0",
+    "eslint-plugin-import": "^2.20.1",
+    "jest": "^25.1.0",
+    "serverless-offline": "^5.12.1",
+    "mongodb": "^3.5.5"
+  }
+}
