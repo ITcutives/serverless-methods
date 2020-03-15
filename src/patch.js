@@ -7,20 +7,6 @@ const { validateEntityName } = require('./helpers/common');
 const Abstract = require('./abstract');
 
 class Patch extends Abstract {
-  static async searchInDB(ClassConstructor, id) {
-    const condition = [{
-      field: 'id',
-      value: id,
-    }];
-    // find all records
-    const classInstance = new ClassConstructor();
-    return classInstance.SELECT(condition);
-  }
-
-  // validator() {
-  //
-  // }
-
   async handle() {
     let operationResult;
 
@@ -44,7 +30,7 @@ class Patch extends Abstract {
     const classInstance = await ClassConstructor.fromLink(ClassConstructor, content);
 
     const validId = classInstance.get('id');
-    const existing = await Patch.searchInDB(ClassConstructor, validId);
+    const existing = await this.searchInDB(ClassConstructor, validId);
     const updatedClassInstance = classInstance.setOriginal(existing[0]);
 
     try {
@@ -54,8 +40,8 @@ class Patch extends Abstract {
     }
 
     await operationResult.UPDATE();
-    const updatedRecords = await Patch.searchInDB(ClassConstructor, id);
-    const dbEntries = await updatedRecords[0].toLink(undefined, this.token.rootDir);
+    const [updatedRecords] = await this.searchInDB(ClassConstructor, id);
+    const dbEntries = await updatedRecords.toLink(undefined, this.token.rootDir);
 
     const rtn = {
       status: undefined,

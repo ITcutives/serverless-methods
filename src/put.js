@@ -9,19 +9,8 @@ const { mapReflect, validateEntityName } = require('./helpers/common');
 const Abstract = require('./abstract');
 
 class Put extends Abstract {
-  static async searchInDB(ClassConstructor, ids) {
-    const condition = [{
-      field: 'id',
-      operator: 'in',
-      value: ids,
-    }];
-    // find all records
-    const classInstance = new ClassConstructor();
-    return classInstance.SELECT(condition);
-  }
-
-  static async mapRecords(ClassConstructor, ids) {
-    const queryResult = await Put.searchInDB(ClassConstructor, ids);
+  async mapRecords(ClassConstructor, ids) {
+    const queryResult = await this.searchInDB(ClassConstructor, ids);
     // technically find should return same number of records as the list of id provided
     if (ids.length !== queryResult.length) {
       throw Boom.badRequest(ErrorCodes.E0007_INVALID_IDS);
@@ -66,7 +55,7 @@ class Put extends Abstract {
       const filtered = content.filter((object) => ids.includes(object.id));
 
       if (filtered.length <= 0) {
-        throw Boom.badRequest(ErrorCodes.E0005_URL_ID_MISMATCH_WITH_OBJECT_ID);
+        throw Boom.badRequest(ErrorCodes.E0004_ID_MISMATCH_WITH_OBJECT_ID);
       }
 
       if (filtered.length !== content.length || filtered.length !== ids.length) {
@@ -91,8 +80,8 @@ class Put extends Abstract {
     const classInstances = await Promise.all(content.map((resource) => ClassConstructor.fromLink(ClassConstructor, resource)));
 
     if (operation === 'UPDATE') {
-      const validIds = loFilter(classInstances.map(o => o.get('id')), o => o !== undefined);
-      const existing = await Put.mapRecords(ClassConstructor, validIds);
+      const validIds = loFilter(classInstances.map((o) => o.get('id')), (o) => o !== undefined);
+      const existing = await this.mapRecords(ClassConstructor, validIds);
       const updatedClassInstances = classInstances.map((r) => {
         r.setOriginal(existing[r.get('id')]);
         return r;
@@ -113,9 +102,9 @@ class Put extends Abstract {
       }
     }
 
-    const errors = ids.filter(i => i.status === 'rejected').map((i) => ({ error: i.e.message }));
-    const updatedIds = ids.filter(i => i.status === 'resolved').map((i) => i.v);
-    const updatedRecords = await Put.searchInDB(ClassConstructor, updatedIds);
+    const errors = ids.filter((i) => i.status === 'rejected').map((i) => ({ error: i.e.message }));
+    const updatedIds = ids.filter((i) => i.status === 'resolved').map((i) => i.v);
+    const updatedRecords = await this.searchInDB(ClassConstructor, updatedIds);
 
     const dbEntries = await Promise.all(updatedRecords.map((resource) => resource.toLink(undefined, this.token.rootDir)));
 

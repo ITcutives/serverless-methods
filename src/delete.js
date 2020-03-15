@@ -19,7 +19,7 @@ class Delete extends Abstract {
     }
 
     const ClassConstructor = this.getClassConstructor(parent);
-    const classInstance = new ClassConstructor();
+    const classInstance = this.getClassInstance(ClassConstructor);
     const records = await classInstance.SELECT({ id });
     if (records.length === 0) {
       throw Boom.notFound(ErrorCodes.E0002_RECORD_NOT_FOUND_DELETE);

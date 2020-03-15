@@ -6,7 +6,7 @@ const user = 'ashish@itcutives.com';
 const config = {
   host: 'localhost',
   port: 3000,
-  path: '/v1',
+  path: '/v1/account-some-account',
   jwt: {
     key: 'abcd',
     iss: user,
@@ -246,9 +246,9 @@ const r = new Request(config);
     type: 'USER',
     id: userId,
     links: {
-      articles: [
-        articleId,
-      ],
+      // articles: [
+      //   articleId,
+      // ],
     },
   });
   console.log('PASS \t PUT /users/:id');
@@ -496,9 +496,9 @@ const r = new Request(config);
     type: 'USER',
     id: userId,
     links: {
-      articles: [
-        articleId,
-      ],
+      // articles: [
+      //   articleId,
+      // ],
     },
   });
   console.log('PASS \t PATCH /users/:id');

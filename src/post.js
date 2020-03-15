@@ -4,16 +4,6 @@ const { validateEntityName } = require('./helpers/common');
 const Abstract = require('./abstract');
 
 class Post extends Abstract {
-  static async searchInDB(ClassConstructor, id) {
-    const condition = [{
-      field: 'id',
-      value: id,
-    }];
-    // find all records
-    const classInstance = new ClassConstructor();
-    return classInstance.SELECT(condition);
-  }
-
   async handle() {
     let operationResult;
 
@@ -38,8 +28,8 @@ class Post extends Abstract {
     }
 
     const id = await operationResult.INSERT();
-    const insertedRecords = await Post.searchInDB(ClassConstructor, id);
-    const dbEntries = await insertedRecords[0].toLink(undefined, this.token.rootDir);
+    const [insertedRecords] = await this.searchInDB(ClassConstructor, id);
+    const dbEntries = await insertedRecords.toLink(undefined, this.token.rootDir);
 
     const rtn = {
       status: undefined,

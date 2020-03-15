@@ -78,8 +78,8 @@ class Token {
   }
 
   isAllowed(plural, action, object) {
-    const Cls = require(`${this.rootDir}/security/${plural}`);
-    const obj = new Cls(this, action, object);
+    const ClassConstructor = require(`${this.rootDir}/security/${plural}`);
+    const obj = new ClassConstructor(this, action, object);
     return obj.isAllowed();
   }
 

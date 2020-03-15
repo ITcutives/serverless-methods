@@ -20,7 +20,7 @@
   "author": "Ashish Tilara <ashish@itcutives.com>",
   "license": "MIT",
   "dependencies": {
-    "@itcutives/adapter-mongo": "git+https://github.com/ITcutives/adapter-mongo.git",
+    "@itcutives/adapter-mongo": "file:../../adapter-mongo",
     "@itcutives/adapter-mysql": "^1.0.0",
     "@itcutives/serverless-helpers": "^4.0.0",
     "boom": "^7.3.0",

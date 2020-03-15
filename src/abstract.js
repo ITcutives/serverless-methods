@@ -9,12 +9,29 @@ class Abstract {
     this.token = token;
   }
 
+  async searchInDB(ClassConstructor, ids) {
+    const condition = [{
+      field: 'id',
+      operator: 'in',
+      value: ids,
+    }];
+    // find all records
+    const classInstance = this.getClassInstance(ClassConstructor);
+    return classInstance.SELECT(condition);
+  }
+
   getClassConstructor(name) {
     return require(`${this.token.rootDir}/models/${name}`);
   }
 
   async handle() {
     return this.response.respond(200, this.request);
+  }
+
+  getClassInstance(ClassConstructor) {
+    const classInstance = new ClassConstructor();
+    classInstance.setContext(this.request);
+    return classInstance;
   }
 }
 
