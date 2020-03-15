@@ -6,7 +6,7 @@ const user = 'ashish@itcutives.com';
 const config = {
   host: 'localhost',
   port: 3000,
-  path: '/v1/account-some-account',
+  path: '/v1',
   jwt: {
     key: 'abcd',
     iss: user,

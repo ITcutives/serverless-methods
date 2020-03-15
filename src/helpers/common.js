@@ -4,9 +4,9 @@
 const Boom = require('boom');
 const ErrorCodes = require('./error-codes.json');
 
-const reflect = promise => promise.then(v => ({ v, status: 'resolved' }), e => ({ e, status: 'rejected' }));
+const reflect = (promise) => promise.then((v) => ({ v, status: 'resolved' }), (e) => ({ e, status: 'rejected' }));
 
-const mapReflect = promises => Promise.all(promises.map(reflect));
+const mapReflect = (promises) => Promise.all(promises.map(reflect));
 
 const validateEntityName = (classes, parent) => {
   // check entity

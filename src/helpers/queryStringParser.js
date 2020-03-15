@@ -73,7 +73,7 @@ class Prepare {
       qsFields = actualFields;
     }
     if (!loIsArray(qsFields)) {
-      qsFields = loMap(qsFields.split(','), v => loTrim(v));
+      qsFields = loMap(qsFields.split(','), (v) => loTrim(v));
     }
     // case 2: valid + invalid fields
     // clean field list, just keep valid fields
@@ -121,7 +121,7 @@ class Prepare {
       return [];
     }
 
-    qsOrder = loMap(qsOrder.split(','), v => loTrim(v));
+    qsOrder = loMap(qsOrder.split(','), (v) => loTrim(v));
 
     return qsOrder.filter((q) => {
       if (q.indexOf('-') === 0) {
@@ -167,7 +167,7 @@ const ConditionBuilder = (path, CLASSES, ModelPath) => {
       throw Boom.badRequest(ErrorCodes.E0013_BAD_ENTITY_NAME);
     }
 
-    const link = loFind(returnv.class.LINKS, v => v.PLURAL === path.parent);
+    const link = loFind(returnv.class.LINKS, (v) => v.PLURAL === path.parent);
 
     switch (loGet(link, 'TYPE')) {
       case '1TO1':

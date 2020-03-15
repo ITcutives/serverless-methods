@@ -2,5 +2,4 @@
 coverage
 node_modules
 temp
-example
-multi-tenant
+*.template.sh

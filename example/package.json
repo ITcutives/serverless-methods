@@ -1,14 +1,16 @@
 {
-  "name": "serverless-example",
+  "name": "@itcutives/api",
   "version": "1.0.0",
-  "description": "Serverless Example",
+  "description": "ITcutives single-tenant API example - supporting mongodb and mysql",
   "main": "index.js",
   "scripts": {
     "test": "npx jest",
     "coverage": "npx jest --coverage",
-    "pretest": "eslint .",
+    "lint": "npx eslint .",
+    "pretest": "npm run lint",
     "start": "./bin/local.sh",
-    "e2e": "./bin/e2e.sh"
+    "e2e": "./bin/e2e.sh",
+    "deploy": "./bin/deploy.sh"
   },
   "keywords": [
     "serverless",
@@ -18,17 +20,20 @@
     "json"
   ],
   "author": "Ashish Tilara <ashish@itcutives.com>",
-  "license": "MIT",
+  "license": "UNLICENSED",
   "dependencies": {
     "@itcutives/adapter-mongo": "file:../../adapter-mongo",
     "@itcutives/adapter-mysql": "^1.0.0",
     "@itcutives/serverless-helpers": "^4.0.0",
     "boom": "^7.3.0",
     "jsonwebtoken": "^8.5.1",
-    "mongodb": "^3.2.3"
+    "mongodb": "^3.5.5"
   },
   "devDependencies": {
-    "jest": "^24.7.1",
-    "serverless-offline": "^4.9.4"
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb-base": "^14.1.0",
+    "eslint-plugin-import": "^2.20.1",
+    "jest": "^25.1.0",
+    "serverless-offline": "^5.12.1"
   }
 }
