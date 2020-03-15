@@ -24,13 +24,17 @@ class Abstract {
     return require(`${this.token.rootDir}/models/${name}`);
   }
 
+  getContext() {
+    return this.request;
+  }
+
   async handle() {
     return this.response.respond(200, this.request);
   }
 
   getClassInstance(ClassConstructor) {
     const classInstance = new ClassConstructor();
-    classInstance.setContext(this.request);
+    classInstance.setContext(this.getContext());
     return classInstance;
   }
 }

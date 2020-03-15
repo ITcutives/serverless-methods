@@ -20,7 +20,7 @@ class Post extends Abstract {
 
     const ClassConstructor = this.getClassConstructor(parent);
 
-    const classInstance = await ClassConstructor.fromLink(ClassConstructor, content);
+    const classInstance = await ClassConstructor.fromLink(ClassConstructor, this.getContext(), content);
     try {
       operationResult = await token.isAllowed(ClassConstructor.PLURAL, 'create', classInstance);
     } catch (e) {

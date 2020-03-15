@@ -81,6 +81,10 @@ class Message extends Abstract {
     };
   }
 
+  getDatabase() {
+    return `tenant-${this.context.url.params.tenant}`;
+  }
+
   INSERT() {
     this.set('status', Message.ALLOWED_STATUSES.UNREAD);
 

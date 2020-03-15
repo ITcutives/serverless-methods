@@ -52,6 +52,10 @@ class Tag extends Abstract {
     };
   }
 
+  getDatabase() {
+    return `tenant-${this.context.url.params.tenant}`;
+  }
+
   INSERT() {
     Tag.LINKS.forEach((link) => {
       if (!this.get(link.LINK) && link.TYPE === '1TO1') {

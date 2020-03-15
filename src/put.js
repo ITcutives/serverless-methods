@@ -77,7 +77,7 @@ class Put extends Abstract {
       }
     }
 
-    const classInstances = await Promise.all(content.map((resource) => ClassConstructor.fromLink(ClassConstructor, resource)));
+    const classInstances = await Promise.all(content.map((resource) => ClassConstructor.fromLink(ClassConstructor, this.getContext(), resource)));
 
     if (operation === 'UPDATE') {
       const validIds = loFilter(classInstances.map((o) => o.get('id')), (o) => o !== undefined);

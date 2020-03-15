@@ -47,6 +47,10 @@ class Membership extends Abstract {
     };
   }
 
+  getDatabase() {
+    return `tenant-${this.context.url.params.tenant}`;
+  }
+
   INSERT() {
     Membership.LINKS.forEach((link) => {
       if (!this.get(link.LINK)) {

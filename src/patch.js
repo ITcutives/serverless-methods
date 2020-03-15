@@ -27,7 +27,7 @@ class Patch extends Abstract {
       throw Boom.badRequest(ErrorCodes.E0004_ID_MISMATCH_WITH_OBJECT_ID);
     }
 
-    const classInstance = await ClassConstructor.fromLink(ClassConstructor, content);
+    const classInstance = await ClassConstructor.fromLink(ClassConstructor, this.getContext(), content);
 
     const validId = classInstance.get('id');
     const existing = await this.searchInDB(ClassConstructor, validId);
