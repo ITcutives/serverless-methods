@@ -1,0 +1,361 @@
+{
+    "info": {
+        "name": "serverless-methods-multi-tenant",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+            "name": "GET /v1/account-na/users",
+            "event": [
+                {
+                    "listen": "test",
+                    "script": {
+                        "id": "22a3ea6c-34a2-4167-b506-671158c57478",
+                        "exec": [
+                            "pm.test(\"Status code is 404\", function () {",
+                            "    pm.response.to.have.status(404);",
+                            "});",
+                            "",
+                            "pm.test(\"Your test name\", function () {",
+                            "    var jsonData = pm.response.json();",
+                            "    pm.expect(jsonData).to.eql({",
+                            "        \"errors\": [",
+                            "            {",
+                            "                \"status\": \"404\",",
+                            "                \"title\": \"Not Found\",",
+                            "                \"detail\": \"No matching record found\",",
+                            "                \"code\": \"E0015\",",
+                            "                \"meta\": \"E0015:No matching record found\"",
+                            "            }",
+                            "        ]",
+                            "    });",
+                            "});"
+                        ],
+                        "type": "text/javascript"
+                    }
+                }
+            ],
+            "request": {
+                "method": "GET",
+                "url": {
+                    "raw": "{{URL}}/v1/account-{{tenant}}/users",
+                    "host": [
+                        "{{URL}}"
+                    ],
+                    "path": [
+                        "v1",
+                        "account-{{tenant}}",
+                        "users"
+                    ]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "GET /v1/account-na/organisations",
+            "event": [
+                {
+                    "listen": "test",
+                    "script": {
+                        "id": "00290a9c-88bc-4fe6-af35-cad02f038010",
+                        "exec": [
+                            "pm.test(\"Status code is 404\", function () {",
+                            "    pm.response.to.have.status(404);",
+                            "});",
+                            "",
+                            "pm.test(\"Your test name\", function () {",
+                            "    var jsonData = pm.response.json();",
+                            "    pm.expect(jsonData).to.eql({",
+                            "        \"errors\": [",
+                            "            {",
+                            "                \"status\": \"404\",",
+                            "                \"title\": \"Not Found\",",
+                            "                \"detail\": \"No matching record found\",",
+                            "                \"code\": \"E0015\",",
+                            "                \"meta\": \"E0015:No matching record found\"",
+                            "            }",
+                            "        ]",
+                            "    });",
+                            "});"
+                        ],
+                        "type": "text/javascript"
+                    }
+                }
+            ],
+            "request": {
+                "method": "GET",
+                "url": {
+                    "raw": "{{URL}}/v1/account-{{tenant}}/organisations",
+                    "host": [
+                        "{{URL}}"
+                    ],
+                    "path": [
+                        "v1",
+                        "account-{{tenant}}",
+                        "organisations"
+                    ]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "GET /v1/account-na/permissions",
+            "event": [
+                {
+                    "listen": "test",
+                    "script": {
+                        "id": "f40e62e0-3411-4e98-bf6d-7fc170e6d678",
+                        "exec": [
+                            "pm.test(\"Status code is 404\", function () {",
+                            "    pm.response.to.have.status(404);",
+                            "});",
+                            "",
+                            "pm.test(\"Your test name\", function () {",
+                            "    var jsonData = pm.response.json();",
+                            "    pm.expect(jsonData).to.eql({",
+                            "        \"errors\": [",
+                            "            {",
+                            "                \"status\": \"404\",",
+                            "                \"title\": \"Not Found\",",
+                            "                \"detail\": \"No matching record found\",",
+                            "                \"code\": \"E0015\",",
+                            "                \"meta\": \"E0015:No matching record found\"",
+                            "            }",
+                            "        ]",
+                            "    });",
+                            "});"
+                        ],
+                        "type": "text/javascript"
+                    }
+                }
+            ],
+            "request": {
+                "method": "GET",
+                "url": {
+                    "raw": "{{URL}}/v1/account-{{tenant}}/permissions",
+                    "host": [
+                        "{{URL}}"
+                    ],
+                    "path": [
+                        "v1",
+                        "account-{{tenant}}",
+                        "permissions"
+                    ]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "GET /v1/account-{{tenant1}}/tags",
+            "event": [
+                {
+                    "listen": "test",
+                    "script": {
+                        "id": "172b5119-0688-487e-a966-7ec0f1fe5bf1",
+                        "exec": [
+                            "pm.test(\"Status code is 404\", function () {",
+                            "    pm.response.to.have.status(404);",
+                            "});",
+                            "",
+                            "pm.test(\"Your test name\", function () {",
+                            "    var jsonData = pm.response.json();",
+                            "    pm.expect(jsonData).to.eql({",
+                            "        \"errors\": [",
+                            "            {",
+                            "                \"status\": \"404\",",
+                            "                \"title\": \"Not Found\",",
+                            "                \"detail\": \"No matching record found\",",
+                            "                \"code\": \"E0015\",",
+                            "                \"meta\": \"E0015:No matching record found\"",
+                            "            }",
+                            "        ]",
+                            "    });",
+                            "});"
+                        ],
+                        "type": "text/javascript"
+                    }
+                }
+            ],
+            "request": {
+                "method": "GET",
+                "url": {
+                    "raw": "{{URL}}/v1/account-{{tenant}}/tags",
+                    "host": [
+                        "{{URL}}"
+                    ],
+                    "path": [
+                        "v1",
+                        "account-{{tenant}}",
+                        "tags"
+                    ]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "GET /v1/account-{{tenant2}}/tags",
+            "event": [
+                {
+                    "listen": "test",
+                    "script": {
+                        "id": "172b5119-0688-487e-a966-7ec0f1fe5bf1",
+                        "exec": [
+                            "pm.test(\"Status code is 404\", function () {",
+                            "    pm.response.to.have.status(404);",
+                            "});",
+                            "",
+                            "pm.test(\"Your test name\", function () {",
+                            "    var jsonData = pm.response.json();",
+                            "    pm.expect(jsonData).to.eql({",
+                            "        \"errors\": [",
+                            "            {",
+                            "                \"status\": \"404\",",
+                            "                \"title\": \"Not Found\",",
+                            "                \"detail\": \"No matching record found\",",
+                            "                \"code\": \"E0015\",",
+                            "                \"meta\": \"E0015:No matching record found\"",
+                            "            }",
+                            "        ]",
+                            "    });",
+                            "});"
+                        ],
+                        "type": "text/javascript"
+                    }
+                }
+            ],
+            "request": {
+                "method": "GET",
+                "url": {
+                    "raw": "{{URL}}/v1/account-{{tenant}}/tags",
+                    "host": [
+                        "{{URL}}"
+                    ],
+                    "path": [
+                        "v1",
+                        "account-{{tenant}}",
+                        "tags"
+                    ]
+                }
+            },
+            "response": []
+        }
+    ],
+    "auth": {
+        "type": "bearer",
+        "bearer": [
+            {
+                "key": "token",
+                "value": "{{authToken}}",
+                "type": "string"
+            }
+        ]
+    },
+    "event": [
+        {
+            "listen": "prerequest",
+            "script": {
+                "id": "83d463fa-b8c5-4c80-aec0-c95b95bb6247",
+                "type": "text/javascript",
+                "exec": [
+                    "function base64url(source) {",
+                    "\t// Encode in classical base64",
+                    "\tencodedSource = CryptoJS.enc.Base64.stringify(source);",
+                    "",
+                    "\t// Remove padding equal characters",
+                    "\tencodedSource = encodedSource.replace(/=+$/, '');",
+                    "",
+                    "\t// Replace characters according to base64url specifications",
+                    "\tencodedSource = encodedSource.replace(/\\+/g, '-');",
+                    "\tencodedSource = encodedSource.replace(/\\//g, '_');",
+                    "",
+                    "\treturn encodedSource;",
+                    "}",
+                    "",
+                    "function addIAT(request) {",
+                    "\tvar iat = Math.floor(Date.now() / 1000) + 257;",
+                    "\tdata.iat = iat;",
+                    "\treturn data;",
+                    "}",
+                    "",
+                    "",
+                    "var header = {",
+                    "\t\"typ\": \"JWT\",",
+                    "\t\"alg\": \"HS256\"",
+                    "};",
+                    "",
+                    "var data = {",
+                    "\t\"iss\": pm.environment.get(\"API_ISSUER\")",
+                    "};",
+                    "",
+                    "data = addIAT(data);",
+                    "",
+                    "var secret = atob(pm.environment.get(\"API_KEY\"));",
+                    "",
+                    "// encode header",
+                    "var stringifiedHeader = CryptoJS.enc.Utf8.parse(JSON.stringify(header));",
+                    "var encodedHeader = base64url(stringifiedHeader);",
+                    "",
+                    "// encode data",
+                    "var stringifiedData = CryptoJS.enc.Utf8.parse(JSON.stringify(data));",
+                    "var encodedData = base64url(stringifiedData);",
+                    "",
+                    "// build token",
+                    "var token = encodedHeader + \".\" + encodedData;",
+                    "",
+                    "// sign token",
+                    "var signature = CryptoJS.HmacSHA256(token, secret);",
+                    "signature = base64url(signature);",
+                    "var signedToken = token + \".\" + signature;",
+                    "",
+                    "postman.setEnvironmentVariable(\"authToken\", signedToken);",
+                    "",
+                    "",
+                    "",
+                    "",
+                    "",
+                    "// var removeIllegalCharacters = function(input) {",
+                    "//     return input",
+                    "//         .replace(/=/g, '')",
+                    "//         .replace(/\\+/g, '-')",
+                    "//         .replace(/\\//g, '_');",
+                    "// };",
+                    "",
+                    "// var base64object = function(input) {",
+                    "//     var inputWords = CryptoJS.enc.Utf8.parse(JSON.stringify(input));",
+                    "//     var base64 = CryptoJS.enc.Base64.stringify(inputWords);",
+                    "//     var output = removeIllegalCharacters(base64);",
+                    "//     return output;",
+                    "// };",
+                    "",
+                    "// var url = request.url;",
+                    "// var slashIndex = url.toLowerCase().startsWith('http') ? 8 : 0;",
+                    "// var path = url.substring(url.indexOf('/', slashIndex), url.length);",
+                    "",
+                    "// var iat = Math.floor(Date.now() / 1000);",
+                    "// var exp = iat + (60 * 1);",
+                    "// var iss = pm.environment.get(\"API_ISSUER\");",
+                    "// var header = { 'alg': 'HS256', 'typ': 'JWT' };",
+                    "// var payload = { 'exp': exp, 'name': iss, 'iat': iat };",
+                    "",
+                    "// var unsignedToken = base64object(header) + \".\" + base64object(payload);",
+                    "",
+                    "// var signatureHash = CryptoJS.HmacSHA256(unsignedToken, pm.environment.get(\"API_KEY\"));",
+                    "// var signature = CryptoJS.enc.Base64.stringify(signatureHash);",
+                    "// var token = unsignedToken + '.' + signature;",
+                    "",
+                    "// pm.environment.set('authToken', removeIllegalCharacters(token));"
+                ]
+            }
+        },
+        {
+            "listen": "test",
+            "script": {
+                "id": "1e25d1c8-3900-4f19-a9f5-2877c134a649",
+                "type": "text/javascript",
+                "exec": [
+                    ""
+                ]
+            }
+        }
+    ]
+}
