@@ -3,10 +3,19 @@ const JWT = require('jsonwebtoken');
 
 class Request {
   /**
-   * @param config - { hostname: '', jwt: { key: '', iss: ''} }
+   * @param config - { hostname: '', jwt: { key: '', iss: ''}, tenant: '' }
    */
   constructor(config) {
     this.config = config;
+    this.setTenant(this.config.tenant);
+  }
+
+  setTenant(tenant) {
+    this.tenant = tenant;
+  }
+
+  getTenant() {
+    return this.tenant;
   }
 
   /**
@@ -22,28 +31,36 @@ class Request {
     return `Bearer ${JWT.sign(obj, this.config.jwt.key)}`;
   }
 
-  GET(entity, id, relationship = '') {
-    let url = `${this.config.path}/${entity}${id ? `/${id}` : ''}`;
-    if (relationship !== '' && id) {
-      url = `${this.config.path}/${relationship}/${id}/${entity}`;
+  getPathString() {
+    let template = this.config.path;
+    if (this.getTenant()) {
+      template = `${this.config.path}/account-{{tenant}}`;
     }
-    return this.request('GET', url);
+    return template.replace('{{tenant}}', this.getTenant());
+  }
+
+  GET(entity, id, relationship = '') {
+    let url = `${this.getPathString()}/${entity}${id ? `/${id}` : ''}`;
+    if (relationship !== '' && id) {
+      url = `${this.getPathString()}/${relationship}/${id}/${entity}`;
+    }
+    return this.request('GET', url, null);
   }
 
   PUT(entity, request, id = null) {
-    return this.request('PUT', `${this.config.path}/${entity}${id ? `/${id}` : ''}`, { [entity]: Array.isArray(request) ? request : [request] });
+    return this.request('PUT', `${this.getPathString()}/${entity}${id ? `/${id}` : ''}`, { [entity]: Array.isArray(request) ? request : [request] });
   }
 
   POST(entity, request) {
-    return this.request('POST', `${this.config.path}/${entity}`, { [entity]: request });
+    return this.request('POST', `${this.getPathString()}/${entity}`, { [entity]: request });
   }
 
   PATCH(entity, request, id = null) {
-    return this.request('PATCH', `${this.config.path}/${entity}${id ? `/${id}` : ''}`, { [entity]: request });
+    return this.request('PATCH', `${this.getPathString()}/${entity}${id ? `/${id}` : ''}`, { [entity]: request });
   }
 
   DELETE(entity, id) {
-    return this.request('DELETE', `${this.config.path}/${entity}/${id}`);
+    return this.request('DELETE', `${this.getPathString()}/${entity}/${id}`);
   }
 
   request(method, path, requestBody = null) {

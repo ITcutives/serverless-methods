@@ -5,30 +5,28 @@
   },
   "item": [
     {
-      "name": "GET /v1/account-na/users",
+      "name": "GET /v1/organisations",
       "event": [
         {
-          "listen": "test",
           "script": {
-            "id": "22a3ea6c-34a2-4167-b506-671158c57478",
             "exec": [
-              "pm.test(\"Status code is 404\", function () {",
-              "    pm.response.to.have.status(404);",
+              "pm.test(\"Status code is 404\", () => {",
+              "  pm.response.to.have.status(404);",
               "});",
               "",
-              "pm.test(\"Your test name\", function () {",
-              "    var jsonData = pm.response.json();",
-              "    pm.expect(jsonData).to.eql({",
-              "        \"errors\": [",
-              "            {",
-              "                \"status\": \"404\",",
-              "                \"title\": \"Not Found\",",
-              "                \"detail\": \"No matching record found\",",
-              "                \"code\": \"E0015\",",
-              "                \"meta\": \"E0015:No matching record found\"",
-              "            }",
-              "        ]",
-              "    });",
+              "pm.test(\"response body is error message\", () => {",
+              "  var jsonData = pm.response.json();",
+              "  pm.expect(jsonData).to.eql({",
+              "    \"errors\": [",
+              "      {",
+              "        \"status\": \"404\",",
+              "        \"title\": \"Not Found\",",
+              "        \"detail\": \"No matching record found\",",
+              "        \"code\": \"E0015\",",
+              "        \"meta\": \"E0015:No matching record found\"",
+              "      }",
+              "    ]",
+              "  });",
               "});"
             ],
             "type": "text/javascript"
@@ -37,61 +35,14 @@
       ],
       "request": {
         "method": "GET",
+        "header": [],
         "url": {
-          "raw": "{{URL}}/v1/account-{{tenant}}/users",
+          "raw": "{{URL}}/v1/organisations",
           "host": [
             "{{URL}}"
           ],
           "path": [
             "v1",
-            "account-{{tenant}}",
-            "users"
-          ]
-        }
-      },
-      "response": []
-    },
-    {
-      "name": "GET /v1/account-na/organisations",
-      "event": [
-        {
-          "listen": "test",
-          "script": {
-            "id": "00290a9c-88bc-4fe6-af35-cad02f038010",
-            "exec": [
-              "pm.test(\"Status code is 404\", function () {",
-              "    pm.response.to.have.status(404);",
-              "});",
-              "",
-              "pm.test(\"Your test name\", function () {",
-              "    var jsonData = pm.response.json();",
-              "    pm.expect(jsonData).to.eql({",
-              "        \"errors\": [",
-              "            {",
-              "                \"status\": \"404\",",
-              "                \"title\": \"Not Found\",",
-              "                \"detail\": \"No matching record found\",",
-              "                \"code\": \"E0015\",",
-              "                \"meta\": \"E0015:No matching record found\"",
-              "            }",
-              "        ]",
-              "    });",
-              "});"
-            ],
-            "type": "text/javascript"
-          }
-        }
-      ],
-      "request": {
-        "method": "GET",
-        "url": {
-          "raw": "{{URL}}/v1/account-{{tenant}}/organisations",
-          "host": [
-            "{{URL}}"
-          ],
-          "path": [
-            "v1",
-            "account-{{tenant}}",
             "organisations"
           ]
         }
@@ -99,30 +50,28 @@
       "response": []
     },
     {
-      "name": "GET /v1/account-na/permissions",
+      "name": "GET /v1/users",
       "event": [
         {
-          "listen": "test",
           "script": {
-            "id": "f40e62e0-3411-4e98-bf6d-7fc170e6d678",
             "exec": [
-              "pm.test(\"Status code is 404\", function () {",
-              "    pm.response.to.have.status(404);",
+              "pm.test(\"Status code is 404\", () => {",
+              "  pm.response.to.have.status(404);",
               "});",
               "",
-              "pm.test(\"Your test name\", function () {",
-              "    var jsonData = pm.response.json();",
-              "    pm.expect(jsonData).to.eql({",
-              "        \"errors\": [",
-              "            {",
-              "                \"status\": \"404\",",
-              "                \"title\": \"Not Found\",",
-              "                \"detail\": \"No matching record found\",",
-              "                \"code\": \"E0015\",",
-              "                \"meta\": \"E0015:No matching record found\"",
-              "            }",
-              "        ]",
-              "    });",
+              "pm.test(\"response body is error message\", () => {",
+              "  var jsonData = pm.response.json();",
+              "  pm.expect(jsonData).to.eql({",
+              "    \"errors\": [",
+              "      {",
+              "        \"status\": \"404\",",
+              "        \"title\": \"Not Found\",",
+              "        \"detail\": \"No matching record found\",",
+              "        \"code\": \"E0015\",",
+              "        \"meta\": \"E0015:No matching record found\"",
+              "      }",
+              "    ]",
+              "  });",
               "});"
             ],
             "type": "text/javascript"
@@ -131,14 +80,59 @@
       ],
       "request": {
         "method": "GET",
+        "header": [],
         "url": {
-          "raw": "{{URL}}/v1/account-{{tenant}}/permissions",
+          "raw": "{{URL}}/v1/users",
           "host": [
             "{{URL}}"
           ],
           "path": [
             "v1",
-            "account-{{tenant}}",
+            "users"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "GET /v1/permissions",
+      "event": [
+        {
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 404\", () => {",
+              "  pm.response.to.have.status(404);",
+              "});",
+              "",
+              "pm.test(\"response body is error message\", () => {",
+              "  var jsonData = pm.response.json();",
+              "  pm.expect(jsonData).to.eql({",
+              "    \"errors\": [",
+              "      {",
+              "        \"status\": \"404\",",
+              "        \"title\": \"Not Found\",",
+              "        \"detail\": \"No matching record found\",",
+              "        \"code\": \"E0015\",",
+              "        \"meta\": \"E0015:No matching record found\"",
+              "      }",
+              "    ]",
+              "  });",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{URL}}/v1/permissions",
+          "host": [
+            "{{URL}}"
+          ],
+          "path": [
+            "v1",
             "permissions"
           ]
         }
@@ -146,30 +140,28 @@
       "response": []
     },
     {
-      "name": "GET /v1/account-{{{{tenant1}}}}/tags",
+      "name": "GET /v1/account-{{tenant1}}/tags",
       "event": [
         {
-          "listen": "test",
           "script": {
-            "id": "172b5119-0688-487e-a966-7ec0f1fe5bf1",
             "exec": [
-              "pm.test(\"Status code is 404\", function () {",
-              "    pm.response.to.have.status(404);",
+              "pm.test(\"Status code is 404\", () => {",
+              "  pm.response.to.have.status(404);",
               "});",
               "",
-              "pm.test(\"Your test name\", function () {",
-              "    var jsonData = pm.response.json();",
-              "    pm.expect(jsonData).to.eql({",
-              "        \"errors\": [",
-              "            {",
-              "                \"status\": \"404\",",
-              "                \"title\": \"Not Found\",",
-              "                \"detail\": \"No matching record found\",",
-              "                \"code\": \"E0015\",",
-              "                \"meta\": \"E0015:No matching record found\"",
-              "            }",
-              "        ]",
-              "    });",
+              "pm.test(\"response body is error message\", () => {",
+              "  var jsonData = pm.response.json();",
+              "  pm.expect(jsonData).to.eql({",
+              "    \"errors\": [",
+              "      {",
+              "        \"status\": \"404\",",
+              "        \"title\": \"Not Found\",",
+              "        \"detail\": \"No matching record found\",",
+              "        \"code\": \"E0015\",",
+              "        \"meta\": \"E0015:No matching record found\"",
+              "      }",
+              "    ]",
+              "  });",
               "});"
             ],
             "type": "text/javascript"
@@ -178,14 +170,15 @@
       ],
       "request": {
         "method": "GET",
+        "header": [],
         "url": {
-          "raw": "{{URL}}/v1/account-{{tenant}}/tags",
+          "raw": "{{URL}}/v1/account-{{tenant1}}/tags",
           "host": [
             "{{URL}}"
           ],
           "path": [
             "v1",
-            "account-{{tenant}}",
+            "account-{{tenant1}}",
             "tags"
           ]
         }
@@ -196,27 +189,25 @@
       "name": "GET /v1/account-{{tenant2}}/tags",
       "event": [
         {
-          "listen": "test",
           "script": {
-            "id": "172b5119-0688-487e-a966-7ec0f1fe5bf1",
             "exec": [
-              "pm.test(\"Status code is 404\", function () {",
-              "    pm.response.to.have.status(404);",
+              "pm.test(\"Status code is 404\", () => {",
+              "  pm.response.to.have.status(404);",
               "});",
               "",
-              "pm.test(\"Your test name\", function () {",
-              "    var jsonData = pm.response.json();",
-              "    pm.expect(jsonData).to.eql({",
-              "        \"errors\": [",
-              "            {",
-              "                \"status\": \"404\",",
-              "                \"title\": \"Not Found\",",
-              "                \"detail\": \"No matching record found\",",
-              "                \"code\": \"E0015\",",
-              "                \"meta\": \"E0015:No matching record found\"",
-              "            }",
-              "        ]",
-              "    });",
+              "pm.test(\"response body is error message\", () => {",
+              "  var jsonData = pm.response.json();",
+              "  pm.expect(jsonData).to.eql({",
+              "    \"errors\": [",
+              "      {",
+              "        \"status\": \"404\",",
+              "        \"title\": \"Not Found\",",
+              "        \"detail\": \"No matching record found\",",
+              "        \"code\": \"E0015\",",
+              "        \"meta\": \"E0015:No matching record found\"",
+              "      }",
+              "    ]",
+              "  });",
               "});"
             ],
             "type": "text/javascript"
@@ -241,12 +232,18 @@
       "response": []
     },
     {
-      "name": "POST /v1/account-na/organisations",
+      "name": "POST /v1/organisations",
       "event": [
         {
-          "listen": "test",
           "script": {
-            "exec": [],
+            "exec": [
+              "pm.test(\"Status code is 201\", () => {",
+              "  pm.response.to.have.status(201);",
+              "});",
+              "var jsonData = pm.response.json();",
+              "pm.environment.set(\"tenant1.id\", jsonData.organisations[0].id);",
+              ""
+            ],
             "type": "text/javascript"
           }
         }
@@ -261,16 +258,15 @@
         ],
         "body": {
           "mode": "raw",
-          "raw": "{\n  \"organisations\": {\n    \"name\": \"{{tenant1}}\",\n    \"config\": {\n      \"address\": \"newLane st.\"\n    }\n  }\n}"
+          "raw": "{\n  \"organisations\": {\n    \"name\": \"tenant1\",\n    \"config\": {\n      \"address\": \"newLane st.\"\n    },\n    \"links\": {}\n  }\n}"
         },
         "url": {
-          "raw": "{{URL}}/v1/account-na/organisations",
+          "raw": "{{URL}}/v1/organisations",
           "host": [
             "{{URL}}"
           ],
           "path": [
             "v1",
-            "account-na",
             "organisations"
           ]
         }
@@ -278,12 +274,18 @@
       "response": []
     },
     {
-      "name": "POST /v1/account-na/organisations",
+      "name": "POST /v1/organisations",
       "event": [
         {
-          "listen": "test",
           "script": {
-            "exec": [],
+            "exec": [
+              "pm.test(\"Status code is 201\", () => {",
+              "  pm.response.to.have.status(201);",
+              "});",
+              "var jsonData = pm.response.json();",
+              "pm.environment.set(\"tenant2.id\", jsonData.organisations[0].id);",
+              ""
+            ],
             "type": "text/javascript"
           }
         }
@@ -298,16 +300,15 @@
         ],
         "body": {
           "mode": "raw",
-          "raw": "{\n  \"organisations\": {\n    \"name\": \"{{tenant2}}\",\n    \"config\": {\n      \"address\": \"newLane st.\"\n    }\n  }\n}"
+          "raw": "{\n  \"organisations\": {\n    \"name\": \"tenant2\",\n    \"config\": {\n      \"address\": \"newLane st.\"\n    },\n    \"links\": {}\n  }\n}"
         },
         "url": {
-          "raw": "{{URL}}/v1/account-na/organisations",
+          "raw": "{{URL}}/v1/organisations",
           "host": [
             "{{URL}}"
           ],
           "path": [
             "v1",
-            "account-na",
             "organisations"
           ]
         }
@@ -315,12 +316,18 @@
       "response": []
     },
     {
-      "name": "POST /v1/account-na/organisations",
+      "name": "POST /v1/organisations",
       "event": [
         {
-          "listen": "test",
           "script": {
-            "exec": [],
+            "exec": [
+              "pm.test(\"Status code is 201\", () => {",
+              "  pm.response.to.have.status(201);",
+              "});",
+              "var jsonData = pm.response.json();",
+              "pm.environment.set(\"tenant3.id\", jsonData.organisations[0].id);",
+              ""
+            ],
             "type": "text/javascript"
           }
         }
@@ -335,16 +342,15 @@
         ],
         "body": {
           "mode": "raw",
-          "raw": "{\n  \"organisations\": {\n    \"name\": \"tenant3\",\n    \"config\": {\n      \"address\": \"newLane st.\"\n    }\n  }\n}"
+          "raw": "{\n  \"organisations\": {\n    \"name\": \"tenant3\",\n    \"config\": {\n      \"address\": \"newLane st.\"\n    },\n    \"links\": {}\n  }\n}"
         },
         "url": {
-          "raw": "{{URL}}/v1/account-na/organisations",
+          "raw": "{{URL}}/v1/organisations",
           "host": [
             "{{URL}}"
           ],
           "path": [
             "v1",
-            "account-na",
             "organisations"
           ]
         }
@@ -352,12 +358,18 @@
       "response": []
     },
     {
-      "name": "POST /v1/account-na/users",
+      "name": "POST /v1/users",
       "event": [
         {
-          "listen": "test",
           "script": {
-            "exec": [],
+            "exec": [
+              "pm.test(\"Status code is 201\", () => {",
+              "  pm.response.to.have.status(201);",
+              "});",
+              "var jsonData = pm.response.json();",
+              "pm.environment.set(\"ash.id\", jsonData.users[0].id);",
+              ""
+            ],
             "type": "text/javascript"
           }
         }
@@ -372,16 +384,15 @@
         ],
         "body": {
           "mode": "raw",
-          "raw": "{\n  \"users\": {\n    \"id\": \"ashish@itcutives.com\",\n    \"attributes\": {\n      \"language\": \"en\"\n    }\n  }\n}"
+          "raw": "{\n  \"users\": {\n    \"id\": \"ash@serverlesstest.com\",\n    \"attributes\": {\n      \"language\": \"en\"\n    },\n    \"links\": {}\n  }\n}"
         },
         "url": {
-          "raw": "{{URL}}/v1/account-na/users",
+          "raw": "{{URL}}/v1/users",
           "host": [
             "{{URL}}"
           ],
           "path": [
             "v1",
-            "account-na",
             "users"
           ]
         }
@@ -389,12 +400,18 @@
       "response": []
     },
     {
-      "name": "POST /v1/account-na/users",
+      "name": "POST /v1/users",
       "event": [
         {
-          "listen": "test",
           "script": {
-            "exec": [],
+            "exec": [
+              "pm.test(\"Status code is 201\", () => {",
+              "  pm.response.to.have.status(201);",
+              "});",
+              "var jsonData = pm.response.json();",
+              "pm.environment.set(\"max.id\", jsonData.users[0].id);",
+              ""
+            ],
             "type": "text/javascript"
           }
         }
@@ -409,16 +426,15 @@
         ],
         "body": {
           "mode": "raw",
-          "raw": "{\n  \"users\": {\n    \"id\": \"manish@itcutives.com\",\n    \"attributes\": {\n      \"language\": \"en\"\n    }\n  }\n}"
+          "raw": "{\n  \"users\": {\n    \"id\": \"max@serverlesstest.com\",\n    \"attributes\": {\n      \"language\": \"en\"\n    },\n    \"links\": {}\n  }\n}"
         },
         "url": {
-          "raw": "{{URL}}/v1/account-na/users",
+          "raw": "{{URL}}/v1/users",
           "host": [
             "{{URL}}"
           ],
           "path": [
             "v1",
-            "account-na",
             "users"
           ]
         }
@@ -426,12 +442,18 @@
       "response": []
     },
     {
-      "name": "POST /v1/account-na/users",
+      "name": "POST /v1/users",
       "event": [
         {
-          "listen": "test",
           "script": {
-            "exec": [],
+            "exec": [
+              "pm.test(\"Status code is 201\", () => {",
+              "  pm.response.to.have.status(201);",
+              "});",
+              "var jsonData = pm.response.json();",
+              "pm.environment.set(\"ronie.id\", jsonData.users[0].id);",
+              ""
+            ],
             "type": "text/javascript"
           }
         }
@@ -446,16 +468,15 @@
         ],
         "body": {
           "mode": "raw",
-          "raw": "{\n  \"users\": {\n    \"id\": \"riddhi@itcutives.com\",\n    \"attributes\": {\n      \"language\": \"en\"\n    }\n  }\n}"
+          "raw": "{\n  \"users\": {\n    \"id\": \"ronie@serverlesstest.com\",\n    \"attributes\": {\n      \"language\": \"en\"\n    },\n    \"links\": {}\n  }\n}"
         },
         "url": {
-          "raw": "{{URL}}/v1/account-na/users",
+          "raw": "{{URL}}/v1/users",
           "host": [
             "{{URL}}"
           ],
           "path": [
             "v1",
-            "account-na",
             "users"
           ]
         }
@@ -463,12 +484,18 @@
       "response": []
     },
     {
-      "name": "POST /v1/account-na/users",
+      "name": "POST /v1/users",
       "event": [
         {
-          "listen": "test",
           "script": {
-            "exec": [],
+            "exec": [
+              "pm.test(\"Status code is 201\", () => {",
+              "  pm.response.to.have.status(201);",
+              "});",
+              "var jsonData = pm.response.json();",
+              "pm.environment.set(\"ronald.id\", jsonData.users[0].id);",
+              ""
+            ],
             "type": "text/javascript"
           }
         }
@@ -483,16 +510,15 @@
         ],
         "body": {
           "mode": "raw",
-          "raw": "{\n  \"users\": {\n    \"id\": \"ronald@itcutives.com\",\n    \"attributes\": {\n      \"language\": \"en\"\n    }\n  }\n}"
+          "raw": "{\n  \"users\": {\n    \"id\": \"ronald@serverlesstest.com\",\n    \"attributes\": {\n      \"language\": \"en\"\n    },\n    \"links\": {}\n  }\n}"
         },
         "url": {
-          "raw": "{{URL}}/v1/account-na/users",
+          "raw": "{{URL}}/v1/users",
           "host": [
             "{{URL}}"
           ],
           "path": [
             "v1",
-            "account-na",
             "users"
           ]
         }
@@ -500,12 +526,18 @@
       "response": []
     },
     {
-      "name": "POST /v1/account-na/permissions",
+      "name": "POST /v1/permissions",
       "event": [
         {
-          "listen": "test",
           "script": {
-            "exec": [],
+            "exec": [
+              "pm.test(\"Status code is 201\", () => {",
+              "  pm.response.to.have.status(201);",
+              "});",
+              "var jsonData = pm.response.json();",
+              "pm.environment.set(\"ashPermission.id\", jsonData.permissions[0].id);",
+              ""
+            ],
             "type": "text/javascript"
           }
         }
@@ -520,16 +552,15 @@
         ],
         "body": {
           "mode": "raw",
-          "raw": "{\n  \"permissions\": {\n    \"role\": \"USER\",\n    \"links\": {\n      \"organisations\": \"5e734ddfd68aa2cc7cc3a694\",\n      \"users\": \"ashish@itcutives.com\"\n    }\n  }\n}"
+          "raw": "{\n  \"permissions\": {\n    \"role\": \"USER\",\n    \"links\": {\n      \"organisations\": \"{{tenant1.id}}\",\n      \"users\": \"{{ash.id}}\"\n    }\n  }\n}"
         },
         "url": {
-          "raw": "{{URL}}/v1/account-na/permissions",
+          "raw": "{{URL}}/v1/permissions",
           "host": [
             "{{URL}}"
           ],
           "path": [
             "v1",
-            "account-na",
             "permissions"
           ]
         }
@@ -537,12 +568,18 @@
       "response": []
     },
     {
-      "name": "POST /v1/account-na/permissions",
+      "name": "POST /v1/permissions",
       "event": [
         {
-          "listen": "test",
           "script": {
-            "exec": [],
+            "exec": [
+              "pm.test(\"Status code is 201\", () => {",
+              "  pm.response.to.have.status(201);",
+              "});",
+              "var jsonData = pm.response.json();",
+              "pm.environment.set(\"maxPermission.id\", jsonData.permissions[0].id);",
+              ""
+            ],
             "type": "text/javascript"
           }
         }
@@ -557,16 +594,15 @@
         ],
         "body": {
           "mode": "raw",
-          "raw": "{\n  \"permissions\": {\n    \"role\": \"ADMIN\",\n    \"links\": {\n      \"organisations\": \"5e734ddfd68aa2cc7cc3a695\",\n      \"users\": \"manish@itcutives.com\"\n    }\n  }\n}"
+          "raw": "{\n  \"permissions\": {\n    \"role\": \"ADMIN\",\n    \"links\": {\n      \"organisations\": \"{{tenant2.id}}\",\n      \"users\": \"{{max.id}}\"\n    }\n  }\n}"
         },
         "url": {
-          "raw": "{{URL}}/v1/account-na/permissions",
+          "raw": "{{URL}}/v1/permissions",
           "host": [
             "{{URL}}"
           ],
           "path": [
             "v1",
-            "account-na",
             "permissions"
           ]
         }
@@ -574,12 +610,18 @@
       "response": []
     },
     {
-      "name": "POST /v1/account-na/permissions",
+      "name": "POST /v1/permissions",
       "event": [
         {
-          "listen": "test",
           "script": {
-            "exec": [],
+            "exec": [
+              "pm.test(\"Status code is 201\", () => {",
+              "  pm.response.to.have.status(201);",
+              "});",
+              "var jsonData = pm.response.json();",
+              "pm.environment.set(\"ronaldPermission.id\", jsonData.permissions[0].id);",
+              ""
+            ],
             "type": "text/javascript"
           }
         }
@@ -594,16 +636,15 @@
         ],
         "body": {
           "mode": "raw",
-          "raw": "{\n  \"permissions\": {\n    \"role\": \"ADMIN\",\n    \"links\": {\n      \"organisations\": \"5e734ddfd68aa2cc7cc3a694\",\n      \"users\": \"ronald@itcutives.com\"\n    }\n  }\n}"
+          "raw": "{\n  \"permissions\": {\n    \"role\": \"ADMIN\",\n    \"links\": {\n      \"organisations\": \"{{tenant1.id}}\",\n      \"users\": \"{{ronald.id}}\"\n    }\n  }\n}"
         },
         "url": {
-          "raw": "{{URL}}/v1/account-na/permissions",
+          "raw": "{{URL}}/v1/permissions",
           "host": [
             "{{URL}}"
           ],
           "path": [
             "v1",
-            "account-na",
             "permissions"
           ]
         }
@@ -611,12 +652,18 @@
       "response": []
     },
     {
-      "name": "POST /v1/account-na/permissions",
+      "name": "POST /v1/permissions",
       "event": [
         {
-          "listen": "test",
           "script": {
-            "exec": [],
+            "exec": [
+              "pm.test(\"Status code is 201\", () => {",
+              "  pm.response.to.have.status(201);",
+              "});",
+              "var jsonData = pm.response.json();",
+              "pm.environment.set(\"ronaldPermission2.id\", jsonData.permissions[0].id);",
+              ""
+            ],
             "type": "text/javascript"
           }
         }
@@ -631,16 +678,15 @@
         ],
         "body": {
           "mode": "raw",
-          "raw": "{\n  \"permissions\": {\n    \"role\": \"USER\",\n    \"links\": {\n      \"organisations\": \"5e734ddfd68aa2cc7cc3a695\",\n      \"users\": \"ronald@itcutives.com\"\n    }\n  }\n}"
+          "raw": "{\n  \"permissions\": {\n    \"role\": \"USER\",\n    \"links\": {\n      \"organisations\": \"{{tenant2.id}}\",\n      \"users\": \"{{ronald.id}}\"\n    }\n  }\n}"
         },
         "url": {
-          "raw": "{{URL}}/v1/account-na/permissions",
+          "raw": "{{URL}}/v1/permissions",
           "host": [
             "{{URL}}"
           ],
           "path": [
             "v1",
-            "account-na",
             "permissions"
           ]
         }
@@ -651,9 +697,15 @@
       "name": "POST /v1/account-{{tenant1}}/tags",
       "event": [
         {
-          "listen": "test",
           "script": {
-            "exec": [],
+            "exec": [
+              "pm.test(\"Status code is 201\", () => {",
+              "  pm.response.to.have.status(201);",
+              "});",
+              "var jsonData = pm.response.json();",
+              "pm.environment.set(\"t1tag1.id\", jsonData.tags[0].id);",
+              ""
+            ],
             "type": "text/javascript"
           }
         }
@@ -668,7 +720,7 @@
         ],
         "body": {
           "mode": "raw",
-          "raw": "{\n  \"tags\": {\n    \"name\": \"tag1\",\n    \"config\": {\n      \"language\": \"en\"\n    },\n    \"links\": {\n      \"organisations\": \"5e734ddfd68aa2cc7cc3a694\"\n    }\n  }\n}"
+          "raw": "{\n  \"tags\": {\n    \"name\": \"tag1\",\n    \"config\": {\n      \"language\": \"en\"\n    },\n    \"links\": {\n      \"organisations\": \"{{tenant1.id}}\"\n    }\n  }\n}"
         },
         "url": {
           "raw": "{{URL}}/v1/account-{{tenant1}}/tags",
@@ -688,9 +740,15 @@
       "name": "POST /v1/account-{{tenant1}}/tags",
       "event": [
         {
-          "listen": "test",
           "script": {
-            "exec": [],
+            "exec": [
+              "pm.test(\"Status code is 201\", () => {",
+              "  pm.response.to.have.status(201);",
+              "});",
+              "var jsonData = pm.response.json();",
+              "pm.environment.set(\"t1tag2.id\", jsonData.tags[0].id);",
+              ""
+            ],
             "type": "text/javascript"
           }
         }
@@ -705,7 +763,7 @@
         ],
         "body": {
           "mode": "raw",
-          "raw": "{\n  \"tags\": {\n    \"name\": \"tag2\",\n    \"config\": {\n      \"language\": \"en\"\n    },\n    \"links\": {\n      \"organisations\": \"5e734ddfd68aa2cc7cc3a694\"\n    }\n  }\n}"
+          "raw": "{\n  \"tags\": {\n    \"name\": \"tag2\",\n    \"config\": {\n      \"language\": \"en\"\n    },\n    \"links\": {\n      \"organisations\": \"{{tenant1.id}}\"\n    }\n  }\n}"
         },
         "url": {
           "raw": "{{URL}}/v1/account-{{tenant1}}/tags",
@@ -725,9 +783,15 @@
       "name": "POST /v1/account-{{tenant2}}/tags",
       "event": [
         {
-          "listen": "test",
           "script": {
-            "exec": [],
+            "exec": [
+              "pm.test(\"Status code is 201\", () => {",
+              "  pm.response.to.have.status(201);",
+              "});",
+              "var jsonData = pm.response.json();",
+              "pm.environment.set(\"t2tag1.id\", jsonData.tags[0].id);",
+              ""
+            ],
             "type": "text/javascript"
           }
         }
@@ -742,7 +806,7 @@
         ],
         "body": {
           "mode": "raw",
-          "raw": "{\n  \"tags\": {\n    \"name\": \"tag1\",\n    \"config\": {\n      \"language\": \"en\"\n    },\n    \"links\": {\n      \"organisations\": \"5e734ddfd68aa2cc7cc3a695\"\n    }\n  }\n}"
+          "raw": "{\n  \"tags\": {\n    \"name\": \"tag1\",\n    \"config\": {\n      \"language\": \"en\"\n    },\n    \"links\": {\n      \"organisations\": \"{{tenant2.id}}\"\n    }\n  }\n}"
         },
         "url": {
           "raw": "{{URL}}/v1/account-{{tenant2}}/tags",
@@ -762,9 +826,15 @@
       "name": "POST /v1/account-{{tenant2}}/tags",
       "event": [
         {
-          "listen": "test",
           "script": {
-            "exec": [],
+            "exec": [
+              "pm.test(\"Status code is 201\", () => {",
+              "  pm.response.to.have.status(201);",
+              "});",
+              "var jsonData = pm.response.json();",
+              "pm.environment.set(\"t2tag3.id\", jsonData.tags[0].id);",
+              ""
+            ],
             "type": "text/javascript"
           }
         }
@@ -779,8 +849,1695 @@
         ],
         "body": {
           "mode": "raw",
-          "raw": "{\n  \"tags\": {\n    \"name\": \"tag3\",\n    \"config\": {\n      \"language\": \"en\"\n    },\n    \"links\": {\n      \"organisations\": \"5e734ddfd68aa2cc7cc3a695\"\n    }\n  }\n}"
+          "raw": "{\n  \"tags\": {\n    \"name\": \"tag3\",\n    \"config\": {\n      \"language\": \"en\"\n    },\n    \"links\": {\n      \"organisations\": \"{{tenant2.id}}\"\n    }\n  }\n}"
         },
+        "url": {
+          "raw": "{{URL}}/v1/account-{{tenant2}}/tags",
+          "host": [
+            "{{URL}}"
+          ],
+          "path": [
+            "v1",
+            "account-{{tenant2}}",
+            "tags"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "PATCH /v1/organisations/{{tenant1.id}}",
+      "event": [
+        {
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", () => {",
+              "  pm.response.to.have.status(200);",
+              "});",
+              "pm.test(\"response body is valid\", () => {",
+              "  var jsonData = pm.response.json();",
+              "  pm.expect(jsonData.organisations[0]).to.eql({",
+              "  \"name\": \"Hooli\",",
+              "  \"config\": {",
+              "    \"address\": \"newLane st.\",",
+              "    \"country\": \"Australia\"",
+              "  },",
+              "  \"links\": {},",
+              "  \"id\": pm.environment.get(\"tenant1.id\")",
+              "});",
+              "});",
+              ""
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "PATCH",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"organisations\": {\n    \"name\": \"Hooli\",\n    \"config\": {\n      \"address\": \"newLane st.\",\n      \"country\": \"Australia\"\n    },\n    \"links\": {},\n    \"id\": \"{{tenant1.id}}\"\n  }\n}"
+        },
+        "url": {
+          "raw": "{{URL}}/v1/organisations/{{tenant1.id}}",
+          "host": [
+            "{{URL}}"
+          ],
+          "path": [
+            "v1",
+            "organisations",
+            "{{tenant1.id}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "PATCH /v1/organisations/{{tenant2.id}}",
+      "event": [
+        {
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", () => {",
+              "  pm.response.to.have.status(200);",
+              "});",
+              "pm.test(\"response body is valid\", () => {",
+              "  var jsonData = pm.response.json();",
+              "  pm.expect(jsonData.organisations[0]).to.eql({",
+              "  \"name\": \"ITcutives\",",
+              "  \"config\": {",
+              "    \"address\": \"newLane st.\",",
+              "    \"country\": \"India\"",
+              "  },",
+              "  \"links\": {},",
+              "  \"id\": pm.environment.get(\"tenant2.id\")",
+              "});",
+              "});",
+              ""
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "PATCH",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"organisations\": {\n    \"name\": \"ITcutives\",\n    \"config\": {\n      \"address\": \"newLane st.\",\n      \"country\": \"India\"\n    },\n    \"links\": {},\n    \"id\": \"{{tenant2.id}}\"\n  }\n}"
+        },
+        "url": {
+          "raw": "{{URL}}/v1/organisations/{{tenant2.id}}",
+          "host": [
+            "{{URL}}"
+          ],
+          "path": [
+            "v1",
+            "organisations",
+            "{{tenant2.id}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "PATCH /v1/organisations/{{tenant3.id}}",
+      "event": [
+        {
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", () => {",
+              "  pm.response.to.have.status(200);",
+              "});",
+              "pm.test(\"response body is valid\", () => {",
+              "  var jsonData = pm.response.json();",
+              "  pm.expect(jsonData.organisations[0]).to.eql({",
+              "  \"name\": \"Phoenix\",",
+              "  \"config\": {",
+              "    \"address\": \"newLane st.\",",
+              "    \"country\": \"Japan\"",
+              "  },",
+              "  \"links\": {},",
+              "  \"id\": pm.environment.get(\"tenant3.id\")",
+              "});",
+              "});",
+              ""
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "PATCH",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"organisations\": {\n    \"name\": \"Phoenix\",\n    \"config\": {\n      \"address\": \"newLane st.\",\n      \"country\": \"Japan\"\n    },\n    \"links\": {},\n    \"id\": \"{{tenant3.id}}\"\n  }\n}"
+        },
+        "url": {
+          "raw": "{{URL}}/v1/organisations/{{tenant3.id}}",
+          "host": [
+            "{{URL}}"
+          ],
+          "path": [
+            "v1",
+            "organisations",
+            "{{tenant3.id}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "PATCH /v1/users/{{ash.id}}",
+      "event": [
+        {
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", () => {",
+              "  pm.response.to.have.status(200);",
+              "});",
+              "pm.test(\"response body is valid\", () => {",
+              "  var jsonData = pm.response.json();",
+              "  pm.expect(jsonData.users[0]).to.eql({",
+              "  \"id\": pm.environment.get(\"ash.id\"),",
+              "  \"attributes\": {",
+              "    \"language\": \"en\",",
+              "    \"country\": \"Australia\"",
+              "  },",
+              "  \"links\": {},",
+              "  \"type\": \"USER\"",
+              "});",
+              "});",
+              ""
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "PATCH",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"users\": {\n    \"id\": \"{{ash.id}}\",\n    \"attributes\": {\n      \"language\": \"en\",\n      \"country\": \"Australia\"\n    },\n    \"links\": {},\n    \"type\": \"USER\"\n  }\n}"
+        },
+        "url": {
+          "raw": "{{URL}}/v1/users/{{ash.id}}",
+          "host": [
+            "{{URL}}"
+          ],
+          "path": [
+            "v1",
+            "users",
+            "{{ash.id}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "PATCH /v1/users/{{max.id}}",
+      "event": [
+        {
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", () => {",
+              "  pm.response.to.have.status(200);",
+              "});",
+              "pm.test(\"response body is valid\", () => {",
+              "  var jsonData = pm.response.json();",
+              "  pm.expect(jsonData.users[0]).to.eql({",
+              "  \"id\": pm.environment.get(\"max.id\"),",
+              "  \"attributes\": {",
+              "    \"language\": \"en\",",
+              "    \"country\": \"France\"",
+              "  },",
+              "  \"links\": {},",
+              "  \"type\": \"USER\"",
+              "});",
+              "});",
+              ""
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "PATCH",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"users\": {\n    \"id\": \"{{max.id}}\",\n    \"attributes\": {\n      \"language\": \"en\",\n      \"country\": \"France\"\n    },\n    \"links\": {},\n    \"type\": \"USER\"\n  }\n}"
+        },
+        "url": {
+          "raw": "{{URL}}/v1/users/{{max.id}}",
+          "host": [
+            "{{URL}}"
+          ],
+          "path": [
+            "v1",
+            "users",
+            "{{max.id}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "PATCH /v1/users/{{ronie.id}}",
+      "event": [
+        {
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", () => {",
+              "  pm.response.to.have.status(200);",
+              "});",
+              "pm.test(\"response body is valid\", () => {",
+              "  var jsonData = pm.response.json();",
+              "  pm.expect(jsonData.users[0]).to.eql({",
+              "  \"id\": pm.environment.get(\"ronie.id\"),",
+              "  \"attributes\": {",
+              "    \"language\": \"en\",",
+              "    \"country\": \"India\"",
+              "  },",
+              "  \"links\": {},",
+              "  \"type\": \"USER\"",
+              "});",
+              "});",
+              ""
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "PATCH",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"users\": {\n    \"id\": \"{{ronie.id}}\",\n    \"attributes\": {\n      \"language\": \"en\",\n      \"country\": \"India\"\n    },\n    \"links\": {},\n    \"type\": \"USER\"\n  }\n}"
+        },
+        "url": {
+          "raw": "{{URL}}/v1/users/{{ronie.id}}",
+          "host": [
+            "{{URL}}"
+          ],
+          "path": [
+            "v1",
+            "users",
+            "{{ronie.id}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "PATCH /v1/users/{{ronald.id}}",
+      "event": [
+        {
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", () => {",
+              "  pm.response.to.have.status(200);",
+              "});",
+              "pm.test(\"response body is valid\", () => {",
+              "  var jsonData = pm.response.json();",
+              "  pm.expect(jsonData.users[0]).to.eql({",
+              "  \"id\": pm.environment.get(\"ronald.id\"),",
+              "  \"attributes\": {",
+              "    \"language\": \"en\",",
+              "    \"country\": \"United Kingdom\"",
+              "  },",
+              "  \"links\": {},",
+              "  \"type\": \"USER\"",
+              "});",
+              "});",
+              ""
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "PATCH",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"users\": {\n    \"id\": \"{{ronald.id}}\",\n    \"attributes\": {\n      \"language\": \"en\",\n      \"country\": \"United Kingdom\"\n    },\n    \"links\": {},\n    \"type\": \"USER\"\n  }\n}"
+        },
+        "url": {
+          "raw": "{{URL}}/v1/users/{{ronald.id}}",
+          "host": [
+            "{{URL}}"
+          ],
+          "path": [
+            "v1",
+            "users",
+            "{{ronald.id}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "PATCH /v1/permissions/{{ashPermission.id}}",
+      "event": [
+        {
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", () => {",
+              "  pm.response.to.have.status(200);",
+              "});",
+              "pm.test(\"response body is valid\", () => {",
+              "  var jsonData = pm.response.json();",
+              "  pm.expect(jsonData.permissions[0]).to.eql({",
+              "  \"role\": \"ADMIN\",",
+              "  \"links\": {",
+              "    \"organisations\": pm.environment.get(\"tenant1.id\"),",
+              "    \"users\": pm.environment.get(\"ash.id\")",
+              "  },",
+              "  \"id\": pm.environment.get(\"ashPermission.id\")",
+              "});",
+              "});",
+              ""
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "PATCH",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"permissions\": {\n    \"role\": \"ADMIN\",\n    \"links\": {\n      \"organisations\": \"{{tenant1.id}}\",\n      \"users\": \"{{ash.id}}\"\n    },\n    \"id\": \"{{ashPermission.id}}\"\n  }\n}"
+        },
+        "url": {
+          "raw": "{{URL}}/v1/permissions/{{ashPermission.id}}",
+          "host": [
+            "{{URL}}"
+          ],
+          "path": [
+            "v1",
+            "permissions",
+            "{{ashPermission.id}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "PATCH /v1/permissions/{{maxPermission.id}}",
+      "event": [
+        {
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", () => {",
+              "  pm.response.to.have.status(200);",
+              "});",
+              "pm.test(\"response body is valid\", () => {",
+              "  var jsonData = pm.response.json();",
+              "  pm.expect(jsonData.permissions[0]).to.eql({",
+              "  \"role\": \"USER\",",
+              "  \"links\": {",
+              "    \"organisations\": pm.environment.get(\"tenant2.id\"),",
+              "    \"users\": pm.environment.get(\"max.id\")",
+              "  },",
+              "  \"id\": pm.environment.get(\"maxPermission.id\")",
+              "});",
+              "});",
+              ""
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "PATCH",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"permissions\": {\n    \"role\": \"USER\",\n    \"links\": {\n      \"organisations\": \"{{tenant2.id}}\",\n      \"users\": \"{{max.id}}\"\n    },\n    \"id\": \"{{maxPermission.id}}\"\n  }\n}"
+        },
+        "url": {
+          "raw": "{{URL}}/v1/permissions/{{maxPermission.id}}",
+          "host": [
+            "{{URL}}"
+          ],
+          "path": [
+            "v1",
+            "permissions",
+            "{{maxPermission.id}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "PATCH /v1/permissions/{{ronaldPermission.id}}",
+      "event": [
+        {
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", () => {",
+              "  pm.response.to.have.status(200);",
+              "});",
+              "pm.test(\"response body is valid\", () => {",
+              "  var jsonData = pm.response.json();",
+              "  pm.expect(jsonData.permissions[0]).to.eql({",
+              "  \"role\": \"USER\",",
+              "  \"links\": {",
+              "    \"organisations\": pm.environment.get(\"tenant1.id\"),",
+              "    \"users\": pm.environment.get(\"ronald.id\")",
+              "  },",
+              "  \"id\": pm.environment.get(\"ronaldPermission.id\")",
+              "});",
+              "});",
+              ""
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "PATCH",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"permissions\": {\n    \"role\": \"USER\",\n    \"links\": {\n      \"organisations\": \"{{tenant1.id}}\",\n      \"users\": \"{{ronald.id}}\"\n    },\n    \"id\": \"{{ronaldPermission.id}}\"\n  }\n}"
+        },
+        "url": {
+          "raw": "{{URL}}/v1/permissions/{{ronaldPermission.id}}",
+          "host": [
+            "{{URL}}"
+          ],
+          "path": [
+            "v1",
+            "permissions",
+            "{{ronaldPermission.id}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "PATCH /v1/permissions/{{ronaldPermission2.id}}",
+      "event": [
+        {
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", () => {",
+              "  pm.response.to.have.status(200);",
+              "});",
+              "pm.test(\"response body is valid\", () => {",
+              "  var jsonData = pm.response.json();",
+              "  pm.expect(jsonData.permissions[0]).to.eql({",
+              "  \"role\": \"ADMIN\",",
+              "  \"links\": {",
+              "    \"organisations\": pm.environment.get(\"tenant2.id\"),",
+              "    \"users\": pm.environment.get(\"ronald.id\")",
+              "  },",
+              "  \"id\": pm.environment.get(\"ronaldPermission2.id\")",
+              "});",
+              "});",
+              ""
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "PATCH",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"permissions\": {\n    \"role\": \"ADMIN\",\n    \"links\": {\n      \"organisations\": \"{{tenant2.id}}\",\n      \"users\": \"{{ronald.id}}\"\n    },\n    \"id\": \"{{ronaldPermission2.id}}\"\n  }\n}"
+        },
+        "url": {
+          "raw": "{{URL}}/v1/permissions/{{ronaldPermission2.id}}",
+          "host": [
+            "{{URL}}"
+          ],
+          "path": [
+            "v1",
+            "permissions",
+            "{{ronaldPermission2.id}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "PATCH /v1/account-{{tenant1}}/tags/{{t1tag1.id}}",
+      "event": [
+        {
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", () => {",
+              "  pm.response.to.have.status(200);",
+              "});",
+              "pm.test(\"response body is valid\", () => {",
+              "  var jsonData = pm.response.json();",
+              "  pm.expect(jsonData.tags[0]).to.eql({",
+              "  \"name\": \"Accounts\",",
+              "  \"config\": {",
+              "    \"language\": \"en\"",
+              "  },",
+              "  \"links\": {",
+              "    \"organisations\": pm.environment.get(\"tenant1.id\")",
+              "  },",
+              "  \"id\": pm.environment.get(\"t1tag1.id\")",
+              "});",
+              "});",
+              ""
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "PATCH",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"tags\": {\n    \"name\": \"Accounts\",\n    \"config\": {\n      \"language\": \"en\"\n    },\n    \"links\": {\n      \"organisations\": \"{{tenant1.id}}\"\n    },\n    \"id\": \"{{t1tag1.id}}\"\n  }\n}"
+        },
+        "url": {
+          "raw": "{{URL}}/v1/account-{{tenant1}}/tags/{{t1tag1.id}}",
+          "host": [
+            "{{URL}}"
+          ],
+          "path": [
+            "v1",
+            "account-{{tenant1}}",
+            "tags",
+            "{{t1tag1.id}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "PATCH /v1/account-{{tenant1}}/tags/{{t1tag2.id}}",
+      "event": [
+        {
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", () => {",
+              "  pm.response.to.have.status(200);",
+              "});",
+              "pm.test(\"response body is valid\", () => {",
+              "  var jsonData = pm.response.json();",
+              "  pm.expect(jsonData.tags[0]).to.eql({",
+              "  \"name\": \"Sales\",",
+              "  \"config\": {",
+              "    \"language\": \"en\"",
+              "  },",
+              "  \"links\": {",
+              "    \"organisations\": pm.environment.get(\"tenant1.id\")",
+              "  },",
+              "  \"id\": pm.environment.get(\"t1tag2.id\")",
+              "});",
+              "});",
+              ""
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "PATCH",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"tags\": {\n    \"name\": \"Sales\",\n    \"config\": {\n      \"language\": \"en\"\n    },\n    \"links\": {\n      \"organisations\": \"{{tenant1.id}}\"\n    },\n    \"id\": \"{{t1tag2.id}}\"\n  }\n}"
+        },
+        "url": {
+          "raw": "{{URL}}/v1/account-{{tenant1}}/tags/{{t1tag2.id}}",
+          "host": [
+            "{{URL}}"
+          ],
+          "path": [
+            "v1",
+            "account-{{tenant1}}",
+            "tags",
+            "{{t1tag2.id}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "PATCH /v1/account-{{tenant2}}/tags/{{t2tag1.id}}",
+      "event": [
+        {
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", () => {",
+              "  pm.response.to.have.status(200);",
+              "});",
+              "pm.test(\"response body is valid\", () => {",
+              "  var jsonData = pm.response.json();",
+              "  pm.expect(jsonData.tags[0]).to.eql({",
+              "  \"name\": \"Accounts\",",
+              "  \"config\": {",
+              "    \"language\": \"en\"",
+              "  },",
+              "  \"links\": {",
+              "    \"organisations\": pm.environment.get(\"tenant2.id\")",
+              "  },",
+              "  \"id\": pm.environment.get(\"t2tag1.id\")",
+              "});",
+              "});",
+              ""
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "PATCH",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"tags\": {\n    \"name\": \"Accounts\",\n    \"config\": {\n      \"language\": \"en\"\n    },\n    \"links\": {\n      \"organisations\": \"{{tenant2.id}}\"\n    },\n    \"id\": \"{{t2tag1.id}}\"\n  }\n}"
+        },
+        "url": {
+          "raw": "{{URL}}/v1/account-{{tenant2}}/tags/{{t2tag1.id}}",
+          "host": [
+            "{{URL}}"
+          ],
+          "path": [
+            "v1",
+            "account-{{tenant2}}",
+            "tags",
+            "{{t2tag1.id}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "PATCH /v1/account-{{tenant2}}/tags/{{t2tag3.id}}",
+      "event": [
+        {
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", () => {",
+              "  pm.response.to.have.status(200);",
+              "});",
+              "pm.test(\"response body is valid\", () => {",
+              "  var jsonData = pm.response.json();",
+              "  pm.expect(jsonData.tags[0]).to.eql({",
+              "  \"name\": \"Marketing\",",
+              "  \"config\": {",
+              "    \"language\": \"en\"",
+              "  },",
+              "  \"links\": {",
+              "    \"organisations\": pm.environment.get(\"tenant2.id\")",
+              "  },",
+              "  \"id\": pm.environment.get(\"t2tag3.id\")",
+              "});",
+              "});",
+              ""
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "PATCH",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"tags\": {\n    \"name\": \"Marketing\",\n    \"config\": {\n      \"language\": \"en\"\n    },\n    \"links\": {\n      \"organisations\": \"{{tenant2.id}}\"\n    },\n    \"id\": \"{{t2tag3.id}}\"\n  }\n}"
+        },
+        "url": {
+          "raw": "{{URL}}/v1/account-{{tenant2}}/tags/{{t2tag3.id}}",
+          "host": [
+            "{{URL}}"
+          ],
+          "path": [
+            "v1",
+            "account-{{tenant2}}",
+            "tags",
+            "{{t2tag3.id}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "GET /v1/organisations",
+      "event": [
+        {
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", () => {",
+              "  pm.response.to.have.status(200);",
+              "});",
+              "pm.test(\"response body is valid\", () => {",
+              "  var jsonData = pm.response.json();",
+              "  pm.expect(jsonData.organisations.map((e) => e.id)).to.eql([",
+              "  pm.environment.get(\"tenant1.id\"),",
+              "  pm.environment.get(\"tenant2.id\"),",
+              "  pm.environment.get(\"tenant3.id\")",
+              "]);",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{URL}}/v1/organisations",
+          "host": [
+            "{{URL}}"
+          ],
+          "path": [
+            "v1",
+            "organisations"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "GET /v1/users",
+      "event": [
+        {
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", () => {",
+              "  pm.response.to.have.status(200);",
+              "});",
+              "pm.test(\"response body is valid\", () => {",
+              "  var jsonData = pm.response.json();",
+              "  pm.expect(jsonData.users.map((e) => e.id)).to.eql([",
+              "  pm.environment.get(\"ash.id\"),",
+              "  pm.environment.get(\"max.id\"),",
+              "  pm.environment.get(\"ronie.id\"),",
+              "  pm.environment.get(\"ronald.id\")",
+              "]);",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{URL}}/v1/users",
+          "host": [
+            "{{URL}}"
+          ],
+          "path": [
+            "v1",
+            "users"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "GET /v1/permissions",
+      "event": [
+        {
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", () => {",
+              "  pm.response.to.have.status(200);",
+              "});",
+              "pm.test(\"response body is valid\", () => {",
+              "  var jsonData = pm.response.json();",
+              "  pm.expect(jsonData.permissions.map((e) => e.id)).to.eql([",
+              "  pm.environment.get(\"ashPermission.id\"),",
+              "  pm.environment.get(\"maxPermission.id\"),",
+              "  pm.environment.get(\"ronaldPermission.id\"),",
+              "  pm.environment.get(\"ronaldPermission2.id\")",
+              "]);",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{URL}}/v1/permissions",
+          "host": [
+            "{{URL}}"
+          ],
+          "path": [
+            "v1",
+            "permissions"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "GET /v1/account-{{tenant1}}/tags",
+      "event": [
+        {
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", () => {",
+              "  pm.response.to.have.status(200);",
+              "});",
+              "pm.test(\"response body is valid\", () => {",
+              "  var jsonData = pm.response.json();",
+              "  pm.expect(jsonData.tags.map((e) => e.id)).to.eql([",
+              "  pm.environment.get(\"t1tag1.id\"),",
+              "  pm.environment.get(\"t1tag2.id\")",
+              "]);",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{URL}}/v1/account-{{tenant1}}/tags",
+          "host": [
+            "{{URL}}"
+          ],
+          "path": [
+            "v1",
+            "account-{{tenant1}}",
+            "tags"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "GET /v1/account-{{tenant2}}/tags",
+      "event": [
+        {
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", () => {",
+              "  pm.response.to.have.status(200);",
+              "});",
+              "pm.test(\"response body is valid\", () => {",
+              "  var jsonData = pm.response.json();",
+              "  pm.expect(jsonData.tags.map((e) => e.id)).to.eql([",
+              "  pm.environment.get(\"t2tag1.id\"),",
+              "  pm.environment.get(\"t2tag3.id\")",
+              "]);",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{URL}}/v1/account-{{tenant2}}/tags",
+          "host": [
+            "{{URL}}"
+          ],
+          "path": [
+            "v1",
+            "account-{{tenant2}}",
+            "tags"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "DELETE /v1/organisations/{{tenant1.id}}",
+      "event": [
+        {
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 204\", () => {",
+              "  pm.response.to.have.status(204);",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{URL}}/v1/organisations/{{tenant1.id}}",
+          "host": [
+            "{{URL}}"
+          ],
+          "path": [
+            "v1",
+            "organisations",
+            "{{tenant1.id}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "DELETE /v1/organisations/{{tenant2.id}}",
+      "event": [
+        {
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 204\", () => {",
+              "  pm.response.to.have.status(204);",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{URL}}/v1/organisations/{{tenant2.id}}",
+          "host": [
+            "{{URL}}"
+          ],
+          "path": [
+            "v1",
+            "organisations",
+            "{{tenant2.id}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "DELETE /v1/organisations/{{tenant3.id}}",
+      "event": [
+        {
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 204\", () => {",
+              "  pm.response.to.have.status(204);",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{URL}}/v1/organisations/{{tenant3.id}}",
+          "host": [
+            "{{URL}}"
+          ],
+          "path": [
+            "v1",
+            "organisations",
+            "{{tenant3.id}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "DELETE /v1/users/{{ash.id}}",
+      "event": [
+        {
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 204\", () => {",
+              "  pm.response.to.have.status(204);",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{URL}}/v1/users/{{ash.id}}",
+          "host": [
+            "{{URL}}"
+          ],
+          "path": [
+            "v1",
+            "users",
+            "{{ash.id}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "DELETE /v1/users/{{max.id}}",
+      "event": [
+        {
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 204\", () => {",
+              "  pm.response.to.have.status(204);",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{URL}}/v1/users/{{max.id}}",
+          "host": [
+            "{{URL}}"
+          ],
+          "path": [
+            "v1",
+            "users",
+            "{{max.id}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "DELETE /v1/users/{{ronie.id}}",
+      "event": [
+        {
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 204\", () => {",
+              "  pm.response.to.have.status(204);",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{URL}}/v1/users/{{ronie.id}}",
+          "host": [
+            "{{URL}}"
+          ],
+          "path": [
+            "v1",
+            "users",
+            "{{ronie.id}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "DELETE /v1/users/{{ronald.id}}",
+      "event": [
+        {
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 204\", () => {",
+              "  pm.response.to.have.status(204);",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{URL}}/v1/users/{{ronald.id}}",
+          "host": [
+            "{{URL}}"
+          ],
+          "path": [
+            "v1",
+            "users",
+            "{{ronald.id}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "DELETE /v1/permissions/{{ashPermission.id}}",
+      "event": [
+        {
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 204\", () => {",
+              "  pm.response.to.have.status(204);",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{URL}}/v1/permissions/{{ashPermission.id}}",
+          "host": [
+            "{{URL}}"
+          ],
+          "path": [
+            "v1",
+            "permissions",
+            "{{ashPermission.id}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "DELETE /v1/permissions/{{maxPermission.id}}",
+      "event": [
+        {
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 204\", () => {",
+              "  pm.response.to.have.status(204);",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{URL}}/v1/permissions/{{maxPermission.id}}",
+          "host": [
+            "{{URL}}"
+          ],
+          "path": [
+            "v1",
+            "permissions",
+            "{{maxPermission.id}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "DELETE /v1/permissions/{{ronaldPermission.id}}",
+      "event": [
+        {
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 204\", () => {",
+              "  pm.response.to.have.status(204);",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{URL}}/v1/permissions/{{ronaldPermission.id}}",
+          "host": [
+            "{{URL}}"
+          ],
+          "path": [
+            "v1",
+            "permissions",
+            "{{ronaldPermission.id}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "DELETE /v1/permissions/{{ronaldPermission2.id}}",
+      "event": [
+        {
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 204\", () => {",
+              "  pm.response.to.have.status(204);",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{URL}}/v1/permissions/{{ronaldPermission2.id}}",
+          "host": [
+            "{{URL}}"
+          ],
+          "path": [
+            "v1",
+            "permissions",
+            "{{ronaldPermission2.id}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "DELETE /v1/account-{{tenant1}}/tags/{{t1tag1.id}}",
+      "event": [
+        {
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 204\", () => {",
+              "  pm.response.to.have.status(204);",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{URL}}/v1/account-{{tenant1}}/tags/{{t1tag1.id}}",
+          "host": [
+            "{{URL}}"
+          ],
+          "path": [
+            "v1",
+            "account-{{tenant1}}",
+            "tags",
+            "{{t1tag1.id}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "DELETE /v1/account-{{tenant1}}/tags/{{t1tag2.id}}",
+      "event": [
+        {
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 204\", () => {",
+              "  pm.response.to.have.status(204);",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{URL}}/v1/account-{{tenant1}}/tags/{{t1tag2.id}}",
+          "host": [
+            "{{URL}}"
+          ],
+          "path": [
+            "v1",
+            "account-{{tenant1}}",
+            "tags",
+            "{{t1tag2.id}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "DELETE /v1/account-{{tenant2}}/tags/{{t2tag1.id}}",
+      "event": [
+        {
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 204\", () => {",
+              "  pm.response.to.have.status(204);",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{URL}}/v1/account-{{tenant2}}/tags/{{t2tag1.id}}",
+          "host": [
+            "{{URL}}"
+          ],
+          "path": [
+            "v1",
+            "account-{{tenant2}}",
+            "tags",
+            "{{t2tag1.id}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "DELETE /v1/account-{{tenant2}}/tags/{{t2tag3.id}}",
+      "event": [
+        {
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 204\", () => {",
+              "  pm.response.to.have.status(204);",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{URL}}/v1/account-{{tenant2}}/tags/{{t2tag3.id}}",
+          "host": [
+            "{{URL}}"
+          ],
+          "path": [
+            "v1",
+            "account-{{tenant2}}",
+            "tags",
+            "{{t2tag3.id}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "GET /v1/organisations",
+      "event": [
+        {
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 404\", () => {",
+              "  pm.response.to.have.status(404);",
+              "});",
+              "",
+              "pm.test(\"response body is error message\", () => {",
+              "  var jsonData = pm.response.json();",
+              "  pm.expect(jsonData).to.eql({",
+              "    \"errors\": [",
+              "      {",
+              "        \"status\": \"404\",",
+              "        \"title\": \"Not Found\",",
+              "        \"detail\": \"No matching record found\",",
+              "        \"code\": \"E0015\",",
+              "        \"meta\": \"E0015:No matching record found\"",
+              "      }",
+              "    ]",
+              "  });",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{URL}}/v1/organisations",
+          "host": [
+            "{{URL}}"
+          ],
+          "path": [
+            "v1",
+            "organisations"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "GET /v1/users",
+      "event": [
+        {
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 404\", () => {",
+              "  pm.response.to.have.status(404);",
+              "});",
+              "",
+              "pm.test(\"response body is error message\", () => {",
+              "  var jsonData = pm.response.json();",
+              "  pm.expect(jsonData).to.eql({",
+              "    \"errors\": [",
+              "      {",
+              "        \"status\": \"404\",",
+              "        \"title\": \"Not Found\",",
+              "        \"detail\": \"No matching record found\",",
+              "        \"code\": \"E0015\",",
+              "        \"meta\": \"E0015:No matching record found\"",
+              "      }",
+              "    ]",
+              "  });",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{URL}}/v1/users",
+          "host": [
+            "{{URL}}"
+          ],
+          "path": [
+            "v1",
+            "users"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "GET /v1/permissions",
+      "event": [
+        {
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 404\", () => {",
+              "  pm.response.to.have.status(404);",
+              "});",
+              "",
+              "pm.test(\"response body is error message\", () => {",
+              "  var jsonData = pm.response.json();",
+              "  pm.expect(jsonData).to.eql({",
+              "    \"errors\": [",
+              "      {",
+              "        \"status\": \"404\",",
+              "        \"title\": \"Not Found\",",
+              "        \"detail\": \"No matching record found\",",
+              "        \"code\": \"E0015\",",
+              "        \"meta\": \"E0015:No matching record found\"",
+              "      }",
+              "    ]",
+              "  });",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{URL}}/v1/permissions",
+          "host": [
+            "{{URL}}"
+          ],
+          "path": [
+            "v1",
+            "permissions"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "GET /v1/account-{{tenant1}}/tags",
+      "event": [
+        {
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 404\", () => {",
+              "  pm.response.to.have.status(404);",
+              "});",
+              "",
+              "pm.test(\"response body is error message\", () => {",
+              "  var jsonData = pm.response.json();",
+              "  pm.expect(jsonData).to.eql({",
+              "    \"errors\": [",
+              "      {",
+              "        \"status\": \"404\",",
+              "        \"title\": \"Not Found\",",
+              "        \"detail\": \"No matching record found\",",
+              "        \"code\": \"E0015\",",
+              "        \"meta\": \"E0015:No matching record found\"",
+              "      }",
+              "    ]",
+              "  });",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{URL}}/v1/account-{{tenant1}}/tags",
+          "host": [
+            "{{URL}}"
+          ],
+          "path": [
+            "v1",
+            "account-{{tenant1}}",
+            "tags"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "GET /v1/account-{{tenant2}}/tags",
+      "event": [
+        {
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 404\", () => {",
+              "  pm.response.to.have.status(404);",
+              "});",
+              "",
+              "pm.test(\"response body is error message\", () => {",
+              "  var jsonData = pm.response.json();",
+              "  pm.expect(jsonData).to.eql({",
+              "    \"errors\": [",
+              "      {",
+              "        \"status\": \"404\",",
+              "        \"title\": \"Not Found\",",
+              "        \"detail\": \"No matching record found\",",
+              "        \"code\": \"E0015\",",
+              "        \"meta\": \"E0015:No matching record found\"",
+              "      }",
+              "    ]",
+              "  });",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
         "url": {
           "raw": "{{URL}}/v1/account-{{tenant2}}/tags",
           "host": [
@@ -801,7 +2558,7 @@
     "bearer": [
       {
         "key": "token",
-        "value": "{{authToken}}",
+        "value": "{{JWT}}",
         "type": "string"
       }
     ]
@@ -814,99 +2571,59 @@
         "type": "text/javascript",
         "exec": [
           "function base64url(source) {",
-          "\t// Encode in classical base64",
-          "\tencodedSource = CryptoJS.enc.Base64.stringify(source);",
+          "  // Encode in classical base64",
+          "  let encodedSource = CryptoJS.enc.Base64.stringify(source);",
           "",
-          "\t// Remove padding equal characters",
-          "\tencodedSource = encodedSource.replace(/=+$/, '');",
+          "  // Remove padding equal characters",
+          "  encodedSource = encodedSource.replace(/=+$/, '');",
           "",
-          "\t// Replace characters according to base64url specifications",
-          "\tencodedSource = encodedSource.replace(/\\+/g, '-');",
-          "\tencodedSource = encodedSource.replace(/\\//g, '_');",
+          "  // Replace characters according to base64url specifications",
+          "  encodedSource = encodedSource.replace(/\\+/g, '-');",
+          "  encodedSource = encodedSource.replace(/\\//g, '_');",
           "",
-          "\treturn encodedSource;",
+          "  return encodedSource;",
           "}",
           "",
-          "function addIAT(request) {",
-          "\tvar iat = Math.floor(Date.now() / 1000) + 257;",
-          "\tdata.iat = iat;",
-          "\treturn data;",
+          "function addIAT() {",
+          "  return Math.floor(Date.now() / 1000) + 257;",
           "}",
           "",
-          "",
-          "var header = {",
-          "\t\"typ\": \"JWT\",",
-          "\t\"alg\": \"HS256\"",
+          "const header = {",
+          "  typ: 'JWT',",
+          "  alg: 'HS256',",
           "};",
           "",
-          "var data = {",
-          "\t\"iss\": pm.environment.get(\"API_ISSUER\")",
+          "const jwtBody = {",
+          "  iss: pm.environment.get('API_ISSUER'),",
+          "  iat: addIAT(),",
           "};",
           "",
-          "data = addIAT(data);",
-          "",
-          "var secret = atob(pm.environment.get(\"API_KEY\"));",
+          "const secret = atob(pm.environment.get('API_KEY'));",
           "",
           "// encode header",
-          "var stringifiedHeader = CryptoJS.enc.Utf8.parse(JSON.stringify(header));",
-          "var encodedHeader = base64url(stringifiedHeader);",
+          "const stringifiedHeader = CryptoJS.enc.Utf8.parse(JSON.stringify(header));",
+          "const encodedHeader = base64url(stringifiedHeader);",
           "",
-          "// encode data",
-          "var stringifiedData = CryptoJS.enc.Utf8.parse(JSON.stringify(data));",
-          "var encodedData = base64url(stringifiedData);",
+          "// encode jwtBody",
+          "const stringifiedData = CryptoJS.enc.Utf8.parse(JSON.stringify(jwtBody));",
+          "const encodedData = base64url(stringifiedData);",
           "",
           "// build token",
-          "var token = encodedHeader + \".\" + encodedData;",
+          "const token = `${encodedHeader}.${encodedData}`;",
           "",
           "// sign token",
-          "var signature = CryptoJS.HmacSHA256(token, secret);",
+          "let signature = CryptoJS.HmacSHA256(token, secret);",
           "signature = base64url(signature);",
-          "var signedToken = token + \".\" + signature;",
+          "const signedToken = `${token}.${signature}`;",
           "",
-          "postman.setEnvironmentVariable(\"authToken\", signedToken);",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "// var removeIllegalCharacters = function(input) {",
-          "//     return input",
-          "//         .replace(/=/g, '')",
-          "//         .replace(/\\+/g, '-')",
-          "//         .replace(/\\//g, '_');",
-          "// };",
-          "",
-          "// var base64object = function(input) {",
-          "//     var inputWords = CryptoJS.enc.Utf8.parse(JSON.stringify(input));",
-          "//     var base64 = CryptoJS.enc.Base64.stringify(inputWords);",
-          "//     var output = removeIllegalCharacters(base64);",
-          "//     return output;",
-          "// };",
-          "",
-          "// var url = request.url;",
-          "// var slashIndex = url.toLowerCase().startsWith('http') ? 8 : 0;",
-          "// var path = url.substring(url.indexOf('/', slashIndex), url.length);",
-          "",
-          "// var iat = Math.floor(Date.now() / 1000);",
-          "// var exp = iat + (60 * 1);",
-          "// var iss = pm.environment.get(\"API_ISSUER\");",
-          "// var header = { 'alg': 'HS256', 'typ': 'JWT' };",
-          "// var payload = { 'exp': exp, 'name': iss, 'iat': iat };",
-          "",
-          "// var unsignedToken = base64object(header) + \".\" + base64object(payload);",
-          "",
-          "// var signatureHash = CryptoJS.HmacSHA256(unsignedToken, pm.environment.get(\"API_KEY\"));",
-          "// var signature = CryptoJS.enc.Base64.stringify(signatureHash);",
-          "// var token = unsignedToken + '.' + signature;",
-          "",
-          "// pm.environment.set('authToken', removeIllegalCharacters(token));"
+          "postman.setEnvironmentVariable('JWT', signedToken);",
+          ""
         ]
       }
     },
     {
       "listen": "test",
       "script": {
-        "id": "1e25d1c8-3900-4f19-a9f5-2877c134a649",
         "type": "text/javascript",
         "exec": [
           ""
