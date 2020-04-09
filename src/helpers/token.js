@@ -6,7 +6,6 @@ const JWT = require('jsonwebtoken');
 class Token {
   constructor() {
     this.authorisation = Token.UNAUTHORISED;
-    this.isSuper = false;
     this.decoded = undefined;
   }
 
@@ -42,11 +41,12 @@ class Token {
    */
   static async Handler(authorization = '', auth0) {
     const headerPart = authorization.split(' ');
+    const ClassConstructor = this;
 
-    const t = new Token();
+    const t = new ClassConstructor();
     try {
       if (headerPart[0] === 'Bearer') {
-        await t.verifyJwt(headerPart[1], auth0, 'base64');
+        await t.verifyJwt(headerPart[1], auth0);
         t.authorisationType = Token.AUTH0;
       } else if (headerPart[0] === 'Token') {
         await t.decodeJwt(headerPart[1]);
@@ -88,9 +88,6 @@ class Token {
       return 'UNAUTHORISED';
     }
 
-    if (this.isSuper === true) {
-      return 'SUPER';
-    }
     return 'USER';
   }
 }

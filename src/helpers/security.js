@@ -17,11 +17,7 @@ class Security {
     throw Boom.unauthorized();
   }
 
-  async SUPER() {
-    return this.object;
-  }
-
-  async ADMIN() {
+  async USER() {
     return this.object;
   }
 }
