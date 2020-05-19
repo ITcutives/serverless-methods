@@ -44,10 +44,6 @@ class Get extends Abstract {
       .filter((x) => x.status === 'resolved')
       .map((x) => x.v.toLink(select.links, this.token.rootDir)));
 
-    if (loIsEmpty(success)) {
-      // internal server error
-      throw Boom.boomify(new Error(ErrorCodes.E0012_INTERNAL_ERROR), 500);
-    }
     const rtn = {};
     const status = success.length === 0 ? 404 : 200;
     rtn[ClassConstructor.PLURAL] = success;

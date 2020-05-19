@@ -1,6 +1,7 @@
 /**
  * Created by ashish on 29/05/2018.
  */
+const Boom = require('boom');
 const JWT = require('jsonwebtoken');
 
 class Token {
@@ -15,10 +16,6 @@ class Token {
 
   static get AUTH0() {
     return 'auth0';
-  }
-
-  static get KEY() {
-    return 'key';
   }
 
   set rootDir(path) {
@@ -45,13 +42,11 @@ class Token {
 
     const t = new ClassConstructor();
     try {
-      if (headerPart[0] === 'Bearer') {
-        await t.verifyJwt(headerPart[1], auth0);
-        t.authorisationType = Token.AUTH0;
-      } else if (headerPart[0] === 'Token') {
-        await t.decodeJwt(headerPart[1]);
-        t.authorisationType = Token.KEY;
+      if (headerPart[0].toLowerCase() !== 'bearer') {
+        throw Boom.badRequest(`TOKEN01: Bad header ${authorization}`);
       }
+      await t.verifyJwt(headerPart[1], auth0);
+      t.authorisationType = Token.AUTH0;
     } catch (e) {
       t.authorisationType = Token.UNAUTHORISED;
       console.error(e);
@@ -71,7 +66,7 @@ class Token {
   }
 
   async prepare() {
-    if (this.authorisation === Token.AUTH0 || this.authorisation === Token.KEY) {
+    if (this.authorisation === Token.AUTH0) {
       // no code
     }
     return this;
