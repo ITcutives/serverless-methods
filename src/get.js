@@ -2,7 +2,6 @@
  * Created by ashish on 29/05/2018.
  */
 const Boom = require('boom');
-const loIsEmpty = require('lodash/isEmpty');
 const loGet = require('lodash/get');
 const ErrorCodes = require('./helpers/error-codes.json');
 const { mapReflect } = require('./helpers/common');
@@ -19,8 +18,8 @@ class Get extends Abstract {
     const select = Prepare.fields(ClassConstructor, loGet(this, 'request.url.query.fields'));
     const order = Prepare.orderBy(ClassConstructor, loGet(this, 'request.url.query.order'));
     const paging = Prepare.page(ClassConstructor, {
-      number: parseInt(loGet(this, 'request.url.query.page.number'), 10),
-      size: parseInt(loGet(this, 'request.url.query.page.size'), 10),
+      number: loGet(this, 'request.url.query.page.number'),
+      size: loGet(this, 'request.url.query.page.size'),
     });
 
     condition.cond = condition.cond.concat(ClassConstructor.getCondition(token));

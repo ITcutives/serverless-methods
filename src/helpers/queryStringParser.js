@@ -79,7 +79,7 @@ class Prepare {
     // clean field list, just keep valid fields
     rtn.fields = qsFields.filter((f) => {
       const ff = f.split('.');
-      return actualFields.indexOf(ff[0]) !== -1;
+      return actualFields.indexOf(ff[0]) !== -1 || actualFields.indexOf(f) !== -1;
     });
 
     // Links Field values
@@ -141,11 +141,12 @@ class Prepare {
     if (!size) {
       size = cls.PAGESIZE;
     }
+    size = parseInt(size, 10);
     const rtn = { from: undefined, limit: size };
     // 0-999
     // 1000-1999
     if (page) {
-      rtn.from = (page - 1) * size;
+      rtn.from = (parseInt(page, 10) - 1) * size;
     }
     return rtn;
   }

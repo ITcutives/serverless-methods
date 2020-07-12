@@ -337,5 +337,11 @@ describe('helpers.queryStringParser', () => {
       const pageSize = 7;
       expect(Prepare.page(cls, { page: null, size: pageSize })).toEqual({ from: undefined, limit: pageSize });
     });
+
+    it('should convert to number and set correct value', () => {
+      const size = '7';
+      const page = '3';
+      expect(Prepare.page(cls, { page, size })).toEqual({ from: 14, limit: 7 });
+    });
   });
 });
