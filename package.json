@@ -40,7 +40,7 @@
   "dependencies": {
     "boom": "^7.3.0",
     "jsonwebtoken": "^8.5.1",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.19",
     "mongodb": "^3.5.5"
   }
 }
