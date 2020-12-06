@@ -94,11 +94,11 @@ class Prepare {
     cls.LINKS.forEach((link) => {
       const linkName = `links.${link.PLURAL}`;
       if (link.TYPE === '1TO1') {
-        if (rtn.fields.indexOf(link.LINK) === -1) {
+        if (rtn.fields.includes(link.LINK)) {
           rtn.fields.push(link.LINK);
         }
         rtn.links.push(link.PLURAL);
-      } else if ((qsFields.indexOf(linkName) !== -1 || qsFields.indexOf('links') !== -1 || isEmptyFieldList) && ['1TOM', 'MTOM'].indexOf(link.TYPE) !== -1) {
+      } else if ((qsFields.includes(linkName) || qsFields.includes('links') || isEmptyFieldList) && ['1TOM', 'MTOM'].includes(link.TYPE)) {
         rtn.links.push(link.PLURAL);
       }
     });
@@ -138,10 +138,12 @@ class Prepare {
    * @returns {{limit: *, from: undefined}}
    */
   static page(cls, { page, size }) {
-    if (!size) {
+    size = parseInt(size || '0', 10);
+
+    if (size === 0 || size > cls.PAGESIZE) {
       size = cls.PAGESIZE;
     }
-    size = parseInt(size, 10);
+
     const rtn = { from: undefined, limit: size };
     // 0-999
     // 1000-1999

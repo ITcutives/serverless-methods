@@ -54,10 +54,17 @@ class Token {
     return t;
   }
 
-  async verifyJwt(jwt, auth0, encoding) {
-    const secret = Buffer.from(auth0, encoding);
-    this.decoded = JWT.verify(jwt, secret);
-    return this;
+  async verifyJwt(jwt, getKeyFn) {
+    return new Promise((resolve, reject) => {
+      JWT.verify(jwt, getKeyFn, (err, decoded) => {
+        if (err) {
+          reject(err);
+          return;
+        }
+        this.decoded = decoded;
+        resolve(this);
+      });
+    });
   }
 
   async decodeJwt(jwt) {

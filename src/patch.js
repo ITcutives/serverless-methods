@@ -8,8 +8,6 @@ const Abstract = require('./abstract');
 
 class Patch extends Abstract {
   async handle() {
-    let operationResult;
-
     const { token } = this;
     const { parent, id } = this.request.url.params;
     const content = this.request.body[parent];
@@ -32,12 +30,7 @@ class Patch extends Abstract {
     const validId = classInstance.get('id');
     const existing = await this.searchInDB(ClassConstructor, validId);
     const updatedClassInstance = classInstance.setOriginal(existing[0]);
-
-    try {
-      operationResult = await token.isAllowed(ClassConstructor.PLURAL, 'edit', updatedClassInstance);
-    } catch (e) {
-      throw Boom.forbidden(ErrorCodes.E0009_PERMISSION_UPDATE, e);
-    }
+    const operationResult = await token.isAllowed(ClassConstructor.PLURAL, 'edit', updatedClassInstance);
 
     await operationResult.UPDATE();
     const [updatedRecords] = await this.searchInDB(ClassConstructor, id);

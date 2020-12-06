@@ -5,8 +5,6 @@ const Abstract = require('./abstract');
 
 class Post extends Abstract {
   async handle() {
-    let operationResult;
-
     const { token } = this;
     const { parent } = this.request.url.params;
     const content = this.request.body[parent];
@@ -21,11 +19,7 @@ class Post extends Abstract {
     const ClassConstructor = this.getClassConstructor(parent);
 
     const classInstance = await ClassConstructor.fromLink(ClassConstructor, this.getContext(), content);
-    try {
-      operationResult = await token.isAllowed(ClassConstructor.PLURAL, 'create', classInstance);
-    } catch (e) {
-      throw Boom.forbidden(ErrorCodes.E0010_PERMISSION_INSERT, e);
-    }
+    const operationResult = await token.isAllowed(ClassConstructor.PLURAL, 'create', classInstance);
 
     const id = await operationResult.INSERT();
     const [insertedRecords] = await this.searchInDB(ClassConstructor, id);
