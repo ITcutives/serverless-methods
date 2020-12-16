@@ -2,6 +2,7 @@ const Boom = require('boom');
 const ErrorCodes = require('./helpers/error-codes.json');
 const { validateEntityName } = require('./helpers/common');
 const Abstract = require('./abstract');
+const { ApiActions } = require('./helpers/enum');
 
 class Post extends Abstract {
   async handle() {
@@ -19,7 +20,7 @@ class Post extends Abstract {
     const ClassConstructor = this.getClassConstructor(parent);
 
     const classInstance = await ClassConstructor.fromLink(ClassConstructor, this.getContext(), content);
-    const operationResult = await token.isAllowed(ClassConstructor.PLURAL, 'create', classInstance);
+    const operationResult = await token.isAllowed(ClassConstructor.PLURAL, ApiActions.CREATE, classInstance);
 
     const id = await operationResult.INSERT();
     const [insertedRecords] = await this.searchInDB(ClassConstructor, id);

@@ -22,7 +22,7 @@
   "author": "Ashish Tilara <ashish@itcutives.com>",
   "license": "UNLICENSED",
   "dependencies": {
-    "@itcutives/adapter-mongo": "file:../../adapter-mongo",
+    "@itcutives/adapter-mongo": "git+https://github.com/ITcutives/adapter-mongo.git#develop",
     "@itcutives/serverless-helpers": "^4.0.0",
     "boom": "^7.3.0",
     "jsonwebtoken": "^8.5.1",

@@ -8,6 +8,7 @@ const ErrorCodes = require('./helpers/error-codes.json');
 const { mapReflect } = require('./helpers/common');
 const { ConditionBuilder, Prepare } = require('./helpers/queryStringParser');
 const Get = require('./get');
+const { ApiActions } = require('./helpers/enum');
 
 class Head extends Get {
   async handle() {
@@ -36,7 +37,7 @@ class Head extends Get {
     if (queryResult.length <= 0) {
       throw Boom.notFound(ErrorCodes.E0015_NO_MATCHING_RECORD);
     }
-    const afterPermissionChecked = await mapReflect(queryResult.map((o) => token.isAllowed(ClassConstructor.PLURAL, 'get', o)));
+    const afterPermissionChecked = await mapReflect(queryResult.map((o) => token.isAllowed(ClassConstructor.PLURAL, ApiActions.GET, o)));
 
     if (afterPermissionChecked.length <= 0) {
       throw Boom.forbidden(ErrorCodes.E0011_PERMISSION_READ);

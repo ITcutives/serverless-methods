@@ -7,6 +7,7 @@ const loFilter = require('lodash/filter');
 const ErrorCodes = require('./helpers/error-codes.json');
 const { mapReflect, validateEntityName } = require('./helpers/common');
 const Abstract = require('./abstract');
+const { ApiActions } = require('./helpers/enum');
 
 class Put extends Abstract {
   async mapRecords(ClassConstructor, ids) {
@@ -88,14 +89,14 @@ class Put extends Abstract {
       });
 
       try {
-        operationResult = await Promise.all(updatedClassInstances.map((o) => token.isAllowed(ClassConstructor.PLURAL, 'edit', o)));
+        operationResult = await Promise.all(updatedClassInstances.map((o) => token.isAllowed(ClassConstructor.PLURAL, ApiActions.EDIT, o)));
         ids = await mapReflect(operationResult.map((instance) => instance.UPDATE().then(() => instance.get('id'))));
       } catch (e) {
         throw Boom.forbidden(ErrorCodes.E0009_PERMISSION_UPDATE, e);
       }
     } else if (operation === 'CREATE') {
       try {
-        operationResult = await Promise.all(classInstances.map((o) => token.isAllowed(ClassConstructor.PLURAL, 'create', o)));
+        operationResult = await Promise.all(classInstances.map((o) => token.isAllowed(ClassConstructor.PLURAL, ApiActions.CREATE, o)));
         ids = await mapReflect(operationResult.map((instance) => instance.INSERT()));
       } catch (e) {
         throw Boom.forbidden(ErrorCodes.E0010_PERMISSION_INSERT, e);

@@ -321,7 +321,7 @@ describe('helpers.queryStringParser', () => {
     });
 
     it('should default to first page (0, 75) when page is 0', () => {
-      expect(Prepare.page(cls, { page: 0 })).toEqual({ from: undefined, limit: 75 });
+      expect(Prepare.page(cls, { number: 0 })).toEqual({ from: undefined, limit: 75 });
     });
 
     it('should default to first page (0, 75) when no values provided', () => {
@@ -330,18 +330,18 @@ describe('helpers.queryStringParser', () => {
 
     it('should override default PAGESIZE, and calculate limit offset and number of objects', () => {
       const pageSize = 10;
-      expect(Prepare.page(cls, { page: 2, size: pageSize })).toEqual({ from: 10, limit: pageSize });
+      expect(Prepare.page(cls, { number: 2, size: pageSize })).toEqual({ from: 10, limit: pageSize });
     });
 
     it('should override default PAGESIZE, and if page not provided it should default `undefined`', () => {
       const pageSize = 7;
-      expect(Prepare.page(cls, { page: null, size: pageSize })).toEqual({ from: undefined, limit: pageSize });
+      expect(Prepare.page(cls, { number: null, size: pageSize })).toEqual({ from: undefined, limit: pageSize });
     });
 
     it('should convert to number and set correct value', () => {
       const size = '7';
-      const page = '3';
-      expect(Prepare.page(cls, { page, size })).toEqual({ from: 14, limit: 7 });
+      const number = '3';
+      expect(Prepare.page(cls, { number, size })).toEqual({ from: 14, limit: 7 });
     });
   });
 });

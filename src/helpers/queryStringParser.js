@@ -94,7 +94,7 @@ class Prepare {
     cls.LINKS.forEach((link) => {
       const linkName = `links.${link.PLURAL}`;
       if (link.TYPE === '1TO1') {
-        if (rtn.fields.includes(link.LINK)) {
+        if (!rtn.fields.includes(link.LINK)) {
           rtn.fields.push(link.LINK);
         }
         rtn.links.push(link.PLURAL);
@@ -133,11 +133,11 @@ class Prepare {
 
   /**
    * @param cls
-   * @param page
-   * @param limit
+   * @param number
+   * @param size
    * @returns {{limit: *, from: undefined}}
    */
-  static page(cls, { page, size }) {
+  static page(cls, { number, size }) {
     size = parseInt(size || '0', 10);
 
     if (size === 0 || size > cls.PAGESIZE) {
@@ -147,8 +147,8 @@ class Prepare {
     const rtn = { from: undefined, limit: size };
     // 0-999
     // 1000-1999
-    if (page) {
-      rtn.from = (parseInt(page, 10) - 1) * size;
+    if (number) {
+      rtn.from = (parseInt(number, 10) - 1) * size;
     }
     return rtn;
   }

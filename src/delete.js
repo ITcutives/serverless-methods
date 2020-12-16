@@ -5,6 +5,7 @@ const Boom = require('boom');
 const ErrorCodes = require('./helpers/error-codes.json');
 const Abstract = require('./abstract');
 const { validateEntityName } = require('./helpers/common');
+const { ApiActions } = require('./helpers/enum');
 
 class Delete extends Abstract {
   async handle() {
@@ -25,7 +26,7 @@ class Delete extends Abstract {
       throw Boom.notFound(ErrorCodes.E0002_RECORD_NOT_FOUND_DELETE);
     }
     let record = records[0];
-    record = await this.token.isAllowed(ClassConstructor.PLURAL, 'delete', record);
+    record = await this.token.isAllowed(ClassConstructor.PLURAL, ApiActions.DELETE, record);
     await record.DELETE();
     return this.response.respond(204, undefined);
   }

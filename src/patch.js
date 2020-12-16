@@ -5,6 +5,7 @@ const Boom = require('boom');
 const ErrorCodes = require('./helpers/error-codes.json');
 const { validateEntityName } = require('./helpers/common');
 const Abstract = require('./abstract');
+const { ApiActions } = require('./helpers/enum');
 
 class Patch extends Abstract {
   async handle() {
@@ -30,7 +31,7 @@ class Patch extends Abstract {
     const validId = classInstance.get('id');
     const existing = await this.searchInDB(ClassConstructor, validId);
     const updatedClassInstance = classInstance.setOriginal(existing[0]);
-    const operationResult = await token.isAllowed(ClassConstructor.PLURAL, 'edit', updatedClassInstance);
+    const operationResult = await token.isAllowed(ClassConstructor.PLURAL, ApiActions.EDIT, updatedClassInstance);
 
     await operationResult.UPDATE();
     const [updatedRecords] = await this.searchInDB(ClassConstructor, id);

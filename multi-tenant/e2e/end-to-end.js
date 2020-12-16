@@ -68,10 +68,10 @@ const multiTenant = async () => {
   const config = {
     host: 'localhost',
     port: 3000,
-    path: '/v1',
+
     // host: 'sgdd2m8ysc.execute-api.ap-southeast-2.amazonaws.com',
     // port: 443,
-    // path: '/dev/v1',
+    path: '/dev/v1',
     jwt: {
       key: 'abcd',
       iss: 'ashish@itcutives.com',
