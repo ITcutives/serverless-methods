@@ -1,7 +1,7 @@
 /**
  * Created by ashish on 1/2/17.
  */
-const Boom = require('boom');
+const Boom = require('@hapi/boom');
 const ErrorCodes = require('./error-codes.json');
 
 const reflect = (promise) => promise.then((v) => ({ v, status: 'resolved' }), (e) => ({ e, status: 'rejected' }));

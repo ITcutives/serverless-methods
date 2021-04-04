@@ -22,10 +22,10 @@
   "author": "Ashish Tilara <ashish@itcutives.com>",
   "license": "UNLICENSED",
   "dependencies": {
+    "@hapi/boom": "^7.4.11",
     "@itcutives/adapter-mongo": "file:../../adapter-mongo",
     "@itcutives/adapter-mysql": "^1.0.0",
     "@itcutives/serverless-helpers": "^4.0.0",
-    "boom": "^7.3.0",
     "jsonwebtoken": "^8.5.1",
     "mongodb": "^3.5.5"
   },

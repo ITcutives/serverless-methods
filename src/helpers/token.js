@@ -1,7 +1,7 @@
 /**
  * Created by ashish on 29/05/2018.
  */
-const Boom = require('boom');
+const Boom = require('@hapi/boom');
 const JWT = require('jsonwebtoken');
 
 class Token {

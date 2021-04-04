@@ -1,4 +1,4 @@
-const Boom = require('boom');
+const Boom = require('@hapi/boom');
 const ErrorCodes = require('./helpers/error-codes.json');
 const { validateEntityName } = require('./helpers/common');
 const Abstract = require('./abstract');

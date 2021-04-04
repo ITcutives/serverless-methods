@@ -2,7 +2,7 @@
 /**
  * Created by ashish on 2/2/17.
  */
-const Boom = require('boom');
+const Boom = require('@hapi/boom');
 const loIsEmpty = require('lodash/isEmpty');
 const loIsArray = require('lodash/isArray');
 const loMap = require('lodash/map');

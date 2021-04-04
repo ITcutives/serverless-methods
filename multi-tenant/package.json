@@ -22,9 +22,9 @@
   "author": "Ashish Tilara <ashish@itcutives.com>",
   "license": "UNLICENSED",
   "dependencies": {
+    "@hapi/boom": "^7.4.11",
     "@itcutives/adapter-mongo": "git+https://github.com/ITcutives/adapter-mongo.git#develop",
     "@itcutives/serverless-helpers": "^4.0.0",
-    "boom": "^7.3.0",
     "jsonwebtoken": "^8.5.1",
     "lodash": "^4.17.15"
   },
@@ -33,7 +33,7 @@
     "eslint-config-airbnb-base": "^14.1.0",
     "eslint-plugin-import": "^2.20.1",
     "jest": "^25.1.0",
-    "serverless-offline": "^5.12.1",
-    "mongodb": "^3.5.5"
+    "mongodb": "^3.5.5",
+    "serverless-offline": "^5.12.1"
   }
 }

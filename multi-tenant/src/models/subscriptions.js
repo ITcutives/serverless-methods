@@ -1,4 +1,4 @@
-const Boom = require('boom');
+const Boom = require('@hapi/boom');
 const Abstract = require('../helpers/db.provider').Mongo;
 
 class Subscription extends Abstract {

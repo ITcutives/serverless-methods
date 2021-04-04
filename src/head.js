@@ -1,7 +1,7 @@
 /**
  * Created by ashish on 29/05/2018.
  */
-const Boom = require('boom');
+const Boom = require('@hapi/boom');
 const loGet = require('lodash/get');
 const loSet = require('lodash/set');
 const ErrorCodes = require('./helpers/error-codes.json');
