@@ -22,7 +22,7 @@ class Patch extends Abstract {
 
     const ClassConstructor = this.getClassConstructor(parent);
 
-    if (content.id !== id) {
+    if (content.id.toString() !== id.toString()) {
       throw Boom.badRequest(ErrorCodes.E0004_ID_MISMATCH_WITH_OBJECT_ID);
     }
 
