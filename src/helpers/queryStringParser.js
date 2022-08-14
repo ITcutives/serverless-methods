@@ -12,7 +12,7 @@ const loGet = require('lodash/get');
 const loFind = require('lodash/find');
 
 const { validateEntityName } = require('./common');
-const ErrorCodes = require('./error-codes');
+const ErrorCodes = require('./error-codes.json');
 
 class Prepare {
   /**

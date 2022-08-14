@@ -57,6 +57,7 @@ class Head extends Get {
       ].join(', '),
       'x-platform-count': length,
       'x-platform-pages': Math.ceil(length / pageSize),
+      'content-type': 'application/json',
     };
     return this.response.respond(status, null, headers);
   }

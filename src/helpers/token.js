@@ -36,8 +36,8 @@ class Token {
    * @returns {*}
    * @constructor
    */
-  static async Handler(authorization = '', auth0) {
-    const headerPart = authorization.split(' ');
+  static async Handler(authorization, auth0) {
+    const headerPart = (authorization || '').split(' ');
     const ClassConstructor = this;
 
     const t = new ClassConstructor();

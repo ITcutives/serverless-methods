@@ -33,7 +33,7 @@ class Post extends Abstract {
     };
     const respond = {};
     respond[rtn.plural] = rtn.objects;
-    return this.response.respond(201, respond);
+    return this.response.respond(201, respond, { 'content-type': 'application/json' });
   }
 }
 
