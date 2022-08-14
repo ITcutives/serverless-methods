@@ -44,7 +44,7 @@ class Patch extends Abstract {
     };
     const respond = {};
     respond[rtn.plural] = rtn.objects;
-    return this.response.respond(200, respond, { 'content-type': 'application/json' });
+    return this.response.respond(200, JSON.stringify(respond), { 'content-type': 'application/json' });
   }
 }
 

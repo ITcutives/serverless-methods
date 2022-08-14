@@ -47,7 +47,7 @@ class Get extends Abstract {
     const rtn = {};
     const status = success.length === 0 ? 404 : 200;
     rtn[ClassConstructor.PLURAL] = success;
-    return this.response.respond(status, rtn, { 'content-type': 'application/json' });
+    return this.response.respond(status, JSON.stringify(rtn), { 'content-type': 'application/json' });
   }
 }
 
