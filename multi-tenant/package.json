@@ -25,7 +25,7 @@
     "@hapi/boom": "^7.4.11",
     "@itcutives/adapter-mongo": "git+https://github.com/ITcutives/adapter-mongo.git#develop",
     "@itcutives/serverless-helpers": "^4.0.0",
-    "jsonwebtoken": "^8.5.1",
+    "jsonwebtoken": "^9.0.0",
     "lodash": "^4.17.15"
   },
   "devDependencies": {
